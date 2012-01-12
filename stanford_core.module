@@ -1,0 +1,33 @@
+<?php
+
+/*
+ * @file 
+ * User interface tweaks and other modifications for the Stanford Sites platform
+ */
+
+/*
+ * Implementation of hook_theme_registry_alter().
+ */
+function stanford_core_theme_registry_alter(&$theme_registry) {
+  $theme_registry['box']['function'] = 'stanford_core_box'; 
+  $theme_registry['box']['path'][] = drupal_get_path('module', 'stanford_core');
+}
+
+/*
+ * Override of search#noresults.
+ * See hook_help() in search.module.
+ */
+function stanford_core_box($title, $content, $region = 'main') {
+  if ($title == 'Your search yielded no results') {
+    $content = '<ul>';
+    $content .= '<li>'. t('Check if your spelling is correct.') .'</li>';
+    $content .= '<li>'. t('Simplify your search by using fewer words.') .'</li>';
+    $content .= '<li>'. t('Remove quotes around phrases to match each word individually: <em>"stanford university"</em> will match less than <em>stanford university</em>.') .'</li>';
+    $content .= '<li>'. t('Consider loosening your query with <em>OR</em>: <em>stanford university</em> will match less than <em>stanford OR university</em>.') .'</li>';
+    $content .= '</ul>';
+  }
+  $output = '<h2 class="title">'. $title .'</h2><div>'. $content .'</div>';
+  return $output;
+}
+
+
