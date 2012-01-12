@@ -22,7 +22,7 @@ function stanford_core_box($title, $content, $region = 'main') {
     $content = '<ul>';
     $content .= '<li>'. t('Check if your spelling is correct.') .'</li>';
     $content .= '<li>'. t('Simplify your search by using fewer words.') .'</li>';
-    $content .= '<li>'. t('Remove quotes around phrases to match each word individually: <em>&quot;stanford university&quot;</em> will match less than <em>stanford university</em>.') .'</li>';
+    $content .= '<li>'. t('Remove quotes around phrases to match each word individually: %stanfordquote will match less than %stanfordnoquote.', array('%stanfordquote' => '"stanford university"', '%stanfordnoquote' => 'stanford university')) .'</li>';
     $content .= '<li>'. t('Consider loosening your query with <em>OR</em>: <em>stanford university</em> will match less than <em>stanford OR university</em>.') .'</li>';
     $content .= '</ul>';
   }
