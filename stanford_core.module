@@ -30,4 +30,24 @@ function stanford_core_box($title, $content, $region = 'main') {
   return $output;
 }
 
+/*
+ * Implementation of hook_menu().
+ */
+function stanford_core_menu() {
+//  $items = array();
+  $items['stanford-front-page-default'] = array(
+    'title' => 'Welcome to Your Stanford Sites Website',
+    'access arguments' => array('access content'),
+    'page callback' => 'stanford_core_frontpage',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
 
+/*
+ * Return content for default front page.
+ */
+function stanford_core_frontpage() {
+  $output = 'Here are the steps to take.';
+  return $output;
+}
