@@ -6,7 +6,7 @@ function stanford_core_install() {
 function stanford_core_firstnode() {
   $body = '<h2>' . t('Where do I start?') . '</h2>';
   $body .= '<ol>';
-  $body .= '<li>' . t("If you haven't already, !login.", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
+  $body .= '<li>' . t("If you haven't already, !login. ", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
   $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/build/modules'))) . '</li>';
   $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/build/themes')));
   $body .= t('<strong>Stanford Basic</strong> is a highly-customizable, mobile-aware site that is available to the entire Stanford community. ');
