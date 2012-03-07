@@ -4,8 +4,17 @@ function stanford_core_install() {
 }
 
 function stanford_core_firstnode() {
-  $body = '<p>' . t('Instructions here.') . '</p><p><!--break--></p>';
-  $teaser = '<p>' . t('Instructions here.') . '</p><p><!--break--></p>';
+  $body = '<h2>' . t('Where do I start?') . '</h2>';
+  $body .= '<ol>';
+  $body .= '<li>' . t("If you haven't already, !login.", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
+  $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/build/modules'))) . '</li>';
+  $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/build/themes')));
+  $body .= t('<strong>Stanford Basic</strong> is a highly-customizable, mobile-aware site that is available to the entire Stanford community. ');
+  $body .= t('<strong>Stanford Modern</strong> is available by default for department installs, and !byrequest for group installs', array('!byrequest' => l('by request', 'https://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=stanfordmodern'))) . '</li>';
+  $body .= '<li>' . t('Finally, !createcontent! ', array('!createcontent' => l('start creating content', 'node/add'))) . t('The default site homepage is a "river of news" format. ');
+  $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/settings/site-information'))) . '</li>';
+  $body .= '</ol>';
+  $body .= '<p>' . t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign'))) . '</p>';
   // Construct the new node object.
   $node = new stdClass();
   // Your script will probably pull this information from a database.
@@ -21,7 +30,7 @@ function stanford_core_firstnode() {
   $node->uid = 1;          // UID of content owner
   $node->language = 'en';
   $node->type = 'page';
-  $node->teaser = $teaser;
+  $node->teaser = $body;
   node_save($node);
 
 }
