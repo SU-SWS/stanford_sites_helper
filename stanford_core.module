@@ -43,7 +43,7 @@ function stanford_core_block($op = 'list', $delta = 0) {
       switch ($delta) {
         case 0:
           $block['subject'] = t('Get Help');
-          $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
+          $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
           break;
       }
       return $block;
