@@ -44,6 +44,26 @@ function stanford_core_menu() {
   return $items;
 }
 
+/**
+* Implementation of hook_block().
+*/
+function stanford_core_block($op = 'list', $delta = 0) {
+  $block = array();
+  switch ($op) {
+    case 'list':
+      $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
+      return $block;
+    case 'view':
+      switch ($delta) {
+        case 0:
+          $block['subject'] = t('Get Help');
+          $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
+          break;
+      }
+      return $block;
+  }
+}
+
 /*
  * Fix spell check as you type (scayt) autostart behavior.
  * See http://drupal.org/node/817894 for reference.
