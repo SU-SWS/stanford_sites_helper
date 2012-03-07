@@ -5,6 +5,7 @@ function stanford_core_install() {
 
 function stanford_core_firstnode() {
   $body = '<p>' . t('Instructions here.') . '</p><p><!--break--></p>';
+  $teaser = '<p>' . t('Instructions here.') . '</p><p><!--break--></p>';
   // Construct the new node object.
   $node = new stdClass();
   // Your script will probably pull this information from a database.
@@ -20,6 +21,7 @@ function stanford_core_firstnode() {
   $node->uid = 1;          // UID of content owner
   $node->language = 'en';
   $node->type = 'page';
+  $node->teaser = $teaser;
   node_save($node);
 
 }
