@@ -1,3 +1,2 @@
-Stanford Core 6.x-1.0-alpha1, 2012-03-07
-------------------------------------------------
-Initial release.
+Stanford Core x.x-x.x, xxxx-xx-xx
+---------------------------------
