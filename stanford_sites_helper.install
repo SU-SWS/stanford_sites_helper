@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for the stanford_core module.
+ * Install, update and uninstall functions for the stanford_sites_helper module.
  *
  */
 
@@ -9,15 +9,15 @@
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_install() {
-  stanford_core_firstnode();
+function stanford_sites_helper_install() {
+  stanford_sites_helper_firstnode();
 }
 
 /**
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_firstnode() {
+function stanford_sites_helper_firstnode() {
   $body = '<h2>' . t('Where do I start?') . '</h2>';
   $body .= '<ol>';
   $body .= '<li>' . t("If you haven't already, !login. ", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';

@@ -12,9 +12,9 @@
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_theme_registry_alter(&$theme_registry) {
-  $theme_registry['box']['function'] = 'stanford_core_box';
-  $theme_registry['box']['path'] = drupal_get_path('module', 'stanford_core');
+function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
+  $theme_registry['box']['function'] = 'stanford_sites_helper_box';
+  $theme_registry['box']['path'] = drupal_get_path('module', 'stanford_sites_helper');
 }
 
 /*
@@ -25,7 +25,7 @@ function stanford_core_theme_registry_alter(&$theme_registry) {
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_box($title, $content, $region = 'main') {
+function stanford_sites_helper_box($title, $content, $region = 'main') {
   if ($title == 'Your search yielded no results') {
     $content = '<ul>';
     $content .= '<li>' . t('Check if your spelling is correct.') . '</li>';
@@ -41,7 +41,7 @@ function stanford_core_box($title, $content, $region = 'main') {
 /**
  * Implements hook_block_info().
  */
-function stanford_core_block_info() {
+function stanford_sites_helper_block_info() {
   $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
   return $block;
 }
@@ -49,7 +49,7 @@ function stanford_core_block_info() {
 /**
  * Implements hook_block_view().
  */
-function stanford_core_block_view($delta) {
+function stanford_sites_helper_block_view($delta) {
   // TODO Rename block deltas (e.g. delta-0) to readable strings.
   switch ($delta) {
     case 'delta-0':
@@ -63,7 +63,7 @@ function stanford_core_block_view($delta) {
 /**
  * Implements hook_block().
  */
-function stanford_core_block_OLD($op = 'list', $delta = 0) {
+function stanford_sites_helper_block_OLD($op = 'list', $delta = 0) {
   // TODO Remaining code in this function needs to be moved to the appropriate new hook function.
   $block = array();
 }
@@ -76,7 +76,7 @@ function stanford_core_block_OLD($op = 'list', $delta = 0) {
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_wysiwyg_editor_settings_alter(&$settings, $context) {
+function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $context) {
   if ($context['profile']->editor == 'ckeditor') {
     $settings['scayt_autoStartup'] = FALSE;
   }
@@ -89,7 +89,7 @@ function stanford_core_wysiwyg_editor_settings_alter(&$settings, $context) {
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function stanford_core_frontpage() {
+function stanford_sites_helper_frontpage() {
   $output = 'Here are the steps to take.';
   return $output;
 }

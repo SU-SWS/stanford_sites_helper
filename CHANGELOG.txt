@@ -1,2 +1,2 @@
-Stanford Core x.x-x.x, xxxx-xx-xx
----------------------------------
+Stanford Sites Helper x.x-x.x, xxxx-xx-xx
+-----------------------------------------
