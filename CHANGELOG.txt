@@ -1,3 +1,12 @@
+Stanford Sites Helper x.x-x.x, xxxx-xx-xx
+-----------------------------------------
+
+
+Stanford Sites Helper 6.x-1.0-alpha2, 2012-04-03
+------------------------------------------------
+Renamed module
+
+
 Stanford Core 6.x-1.0-alpha1, 2012-03-07
 ------------------------------------------------
 Initial release.
