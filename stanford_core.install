@@ -1,18 +1,32 @@
 <?php
+/**
+ * @file
+ * Install, update and uninstall functions for the stanford_core module.
+ *
+ */
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function stanford_core_install() {
   stanford_core_firstnode();
 }
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function stanford_core_firstnode() {
   $body = '<h2>' . t('Where do I start?') . '</h2>';
   $body .= '<ol>';
   $body .= '<li>' . t("If you haven't already, !login. ", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
-  $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/build/modules'))) . '</li>';
-  $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/build/themes')));
+  $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/modules'))) . '</li>';
+  $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/appearance')));
   $body .= t('<strong>Stanford Basic</strong> is a highly-customizable, mobile-aware theme that is available to the entire Stanford community. ');
   $body .= t('<strong>Stanford Modern</strong> is available by default for department installs, and !byrequest for group installs', array('!byrequest' => l('by request', 'https://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=stanfordmodern'))) . '</li>';
   $body .= '<li>' . t('Finally, !createcontent! ', array('!createcontent' => l('start creating content', 'node/add'))) . t('The default site homepage is a "river of news" format. ');
-  $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/settings/site-information'))) . '</li>';
+  $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/config/site-information'))) . '</li>';
   $body .= '</ol>';
   $body .= '<p>' . t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign'))) . '</p>';
   $body .= '<p><!--break--></p>';
@@ -21,14 +35,14 @@ function stanford_core_firstnode() {
   // Your script will probably pull this information from a database.
   $node->title = "Welcome to your Stanford Sites website";
   $node->body = $body;
-  $node->type = 'story';   // Your specified content type
-  $node->created = time();
+  $node->type = 'story'; // Your specified content type
+  $node->created = REQUEST_TIME;
   $node->changed = $node->created;
   $node->status = 1;
   $node->promote = 1;
   $node->sticky = 0;
-  $node->format = 1;       // Filtered HTML
-  $node->uid = 1;          // UID of content owner
+  $node->format = 1; // Filtered HTML
+  $node->uid = 1; // UID of content owner
   $node->language = 'en';
   $node->type = 'page';
   $node->teaser = $body;

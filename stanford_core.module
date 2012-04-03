@@ -1,15 +1,19 @@
 <?php
 
 /*
- * @file 
+ * @file
  * User interface tweaks and other modifications for the Stanford Sites platform
  */
 
 /*
  * Implementation of hook_theme_registry_alter().
  */
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function stanford_core_theme_registry_alter(&$theme_registry) {
-  $theme_registry['box']['function'] = 'stanford_core_box'; 
+  $theme_registry['box']['function'] = 'stanford_core_box';
   $theme_registry['box']['path'] = drupal_get_path('module', 'stanford_core');
 }
 
@@ -17,42 +21,60 @@ function stanford_core_theme_registry_alter(&$theme_registry) {
  * Override of search#noresults.
  * See hook_help() in search.module.
  */
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function stanford_core_box($title, $content, $region = 'main') {
   if ($title == 'Your search yielded no results') {
     $content = '<ul>';
-    $content .= '<li>'. t('Check if your spelling is correct.') .'</li>';
-    $content .= '<li>'. t('Simplify your search by using fewer words.') .'</li>';
-    $content .= '<li>'. t('Remove quotes around phrases to match each word individually: %stanfordquote will match less than %stanfordnoquote.', array('%stanfordquote' => '"stanford university"', '%stanfordnoquote' => 'stanford university')) .'</li>';
-    $content .= '<li>'. t('Consider loosening your query with <em>OR</em>: <em>stanford university</em> will match less than <em>stanford OR university</em>.') .'</li>';
+    $content .= '<li>' . t('Check if your spelling is correct.') . '</li>';
+    $content .= '<li>' . t('Simplify your search by using fewer words.') . '</li>';
+    $content .= '<li>' . t('Remove quotes around phrases to match each word individually: %stanfordquote will match less than %stanfordnoquote.', array('%stanfordquote' => '"stanford university"', '%stanfordnoquote' => 'stanford university')) . '</li>';
+    $content .= '<li>' . t('Consider loosening your query with <em>OR</em>: <em>stanford university</em> will match less than <em>stanford OR university</em>.') . '</li>';
     $content .= '</ul>';
   }
-  $output = '<h2 class="title">'. $title .'</h2><div>'. $content .'</div>';
+  $output = '<h2 class="title">' . $title . '</h2><div>' . $content . '</div>';
   return $output;
 }
 
 /**
-* Implementation of hook_block().
-*/
-function stanford_core_block($op = 'list', $delta = 0) {
-  $block = array();
-  switch ($op) {
-    case 'list':
-      $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
-      return $block;
-    case 'view':
-      switch ($delta) {
-        case 0:
-          $block['subject'] = t('Get Help');
-          $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
-          break;
-      }
-      return $block;
+ * Implements hook_block_info().
+ */
+function stanford_core_block_info() {
+  $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
+  return $block;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function stanford_core_block_view($delta) {
+  // TODO Rename block deltas (e.g. delta-0) to readable strings.
+  switch ($delta) {
+    case 'delta-0':
+      $block['subject'] = t('Get Help');
+      $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
+      break;
   }
+  return $block;
+}
+
+/**
+ * Implements hook_block().
+ */
+function stanford_core_block_OLD($op = 'list', $delta = 0) {
+  // TODO Remaining code in this function needs to be moved to the appropriate new hook function.
+  $block = array();
 }
 
 /*
  * Fix spell check as you type (scayt) autostart behavior.
  * See http://drupal.org/node/817894 for reference.
+ */
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
  */
 function stanford_core_wysiwyg_editor_settings_alter(&$settings, $context) {
   if ($context['profile']->editor == 'ckeditor') {
@@ -62,6 +84,10 @@ function stanford_core_wysiwyg_editor_settings_alter(&$settings, $context) {
 
 /*
  * Return content for default front page.
+ */
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
  */
 function stanford_core_frontpage() {
   $output = 'Here are the steps to take.';
