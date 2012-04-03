@@ -42,7 +42,11 @@ function stanford_sites_helper_box($title, $content, $region = 'main') {
  * Implements hook_block_info().
  */
 function stanford_sites_helper_block_info() {
-  $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
+  $block['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
+  $block['helplinks']['properties']['administrative'] = 1;
+  $block['helplinks']['status'] = 1;
+  $block['helplinks']['visibility'] = BLOCK_VISIBILITY_LISTED;
+  $block['helplinks']['pages'] = "admin\nadmin/*";
   return $block;
 }
 
@@ -50,9 +54,8 @@ function stanford_sites_helper_block_info() {
  * Implements hook_block_view().
  */
 function stanford_sites_helper_block_view($delta) {
-  // TODO Rename block deltas (e.g. delta-0) to readable strings.
   switch ($delta) {
-    case 'delta-0':
+    case 'helplinks':
       $block['subject'] = t('Get Help');
       $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
       break;
