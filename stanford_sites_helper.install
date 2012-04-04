@@ -10,7 +10,7 @@
  * @see http://drupal.org/node/1354
  */
 function stanford_sites_helper_install() {
-  stanford_sites_helper_firstnode();
+  //stanford_sites_helper_firstnode();
 }
 
 /**
