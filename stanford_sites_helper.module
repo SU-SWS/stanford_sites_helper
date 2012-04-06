@@ -53,7 +53,7 @@ function stanford_sites_helper_block_view($delta) {
   switch ($delta) {
     case 'helplinks':
       $block['subject'] = t('Get Help');
-      $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
+      $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=sites')));
       break;
     case 'firststeps':
       $body = '<h3>' . t('Where do I start?') . '</h3>';
