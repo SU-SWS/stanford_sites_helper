@@ -1,6 +1,11 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-alpha2, 2012-04-06
+------------------------------------------------
+-Added "first steps" block on front page
+-Added "get help" block to all admin pages
+
 Stanford Sites Helper 7.x-1.0-alpha1, 2012-04-05
 ------------------------------------------------
 Initial alpha release
