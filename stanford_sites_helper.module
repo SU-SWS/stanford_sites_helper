@@ -35,11 +35,14 @@ function stanford_sites_helper_block_info() {
   $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
   $blocks['helplinks']['properties']['administrative'] = 1;
   $blocks['helplinks']['status'] = 1;
+  $blocks['helplinks']['region'] = 'help';
   $blocks['helplinks']['visibility'] = BLOCK_VISIBILITY_LISTED;
   $blocks['helplinks']['pages'] = "admin\nadmin/*";
-  $blocks['firststeps']['info'] = t('Welcome to your Stanford Sites website');
+  $blocks['firststeps']['info'] = t('Stanford Sites Welcome Text');
   $blocks['firststeps']['status'] = 1;
   $blocks['firststeps']['region'] = 'content';
+  $blocks['firststeps']['visibility'] = BLOCK_VISIBILITY_LISTED;
+  $blocks['firststeps']['pages'] = "<front>";
   return $blocks;
 }
 
@@ -50,7 +53,7 @@ function stanford_sites_helper_block_view($delta) {
   switch ($delta) {
     case 'helplinks':
       $block['subject'] = t('Get Help');
-      $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
+      $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
       break;
     case 'firststeps':
       $body = '<h3>' . t('Where do I start?') . '</h3>';
@@ -63,8 +66,8 @@ function stanford_sites_helper_block_view($delta) {
       $body .= '<li>' . t('Finally, !createcontent! ', array('!createcontent' => l('start creating content', 'node/add'))) . t('The default site homepage is a "river of news" format. ');
       $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/config/site-information'))) . '</li>';
       $body .= '</ol>';
-      $body .= '<p>' . t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign'))) . '</p>';
-      $body .= '<p><!--break--></p>';
+      $body .= '<p>' . t('This message is in a <strong>block</strong>. ');
+      $body .= t('!goaway, and explore other available blocks, at !adminbuildblock.', array('!goaway' => l('Make this message go away', 'admin/structure/block'), '!adminbuildblock' => l('admin/structure/block', 'admin/structure/block'))) . '</p>';
       $block['subject'] = t('Welcome to your Stanford Sites website');
       $block['content'] = $body;
       break;
