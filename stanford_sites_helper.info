@@ -3,4 +3,3 @@ description = "User interface tweaks and other modifications for the Stanford Si
 core = "6.x"
 package = "Stanford"
 version = "6.x-1.0-alpha2"
-
