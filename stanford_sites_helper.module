@@ -42,7 +42,7 @@ function stanford_sites_helper_block_info() {
   $blocks['firststeps']['status'] = 1;
   $blocks['firststeps']['region'] = 'content';
   $blocks['firststeps']['visibility'] = BLOCK_VISIBILITY_LISTED;
-  $blocks['firststeps']['pages'] = "<front>";
+  $blocks['firststeps']['pages'] = "<front>\nuser";
   return $blocks;
 }
 
