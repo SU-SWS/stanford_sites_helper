@@ -5,7 +5,13 @@
  * User interface tweaks and other modifications for the Stanford Sites platform
  */
 
-/*
+/**
+ * Implements hook_init().
+ */
+function stanford_sites_helper_init() {
+  drupal_add_css(drupal_get_path('module', 'stanford_sites_helper') . 'stanford-sites-helper.css');
+}
+/**
  * Implementation of hook_theme_registry_alter().
  */
 function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
@@ -13,7 +19,7 @@ function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
   $theme_registry['box']['path'] = drupal_get_path('module', 'stanford_sites_helper');
 }
 
-/*
+/**
  * Override of search#noresults.
  * See hook_help() in search.module.
  */
@@ -37,15 +43,39 @@ function stanford_sites_helper_block($op = 'list', $delta = 0) {
   $block = array();
   switch ($op) {
     case 'list':
-      $block[0]['info'] = t('Display a list of help links specific to Stanford Sites');
-      return $block;
+      $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
+      $blocks['helplinks']['status'] = 1;
+      $blocks['helplinks']['region'] = 'header';
+      $blocks['helplinks']['visibility'] = 1;
+      $blocks['helplinks']['pages'] = "admin\nadmin/*";
+      $blocks['firststeps']['info'] = t('Stanford Sites Welcome Text');
+      $blocks['firststeps']['status'] = 1;
+      $blocks['firststeps']['region'] = 'content';
+      $blocks['firststeps']['visibility'] = 1;
+      $blocks['firststeps']['pages'] = "<front>\nuser";
+      return $blocks;
     case 'view':
       switch ($delta) {
-        case 0:
+        case 'helplinks':
           $block['subject'] = t('Get Help');
           $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
           break;
-      }
+        case 'firststeps':
+          $body = '<h3>' . t('Where do I start?') . '</h3>';
+          $body .= '<ol>';
+          $body .= '<li>' . t("If you haven't already, !login. ", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
+          $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/modules'))) . '</li>';
+          $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/appearance')));
+          $body .= t('<strong>Stanford Basic</strong> is a highly-customizable, mobile-aware theme that is available to the entire Stanford community. ');
+          $body .= t('<strong>Stanford Modern</strong> is available by default for department installs, and !byrequest for group installs', array('!byrequest' => l('by request', 'https://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=stanfordmodern'))) . '</li>';
+          $body .= '<li>' . t('Finally, !createcontent! ', array('!createcontent' => l('start creating content', 'node/add'))) . t('The default site homepage is a "river of news" format. ');
+          $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/config/site-information'))) . '</li>';
+          $body .= '</ol>';
+          $body .= '<p>' . t('This message is in a <strong>block</strong>. ');
+          $body .= t('!goaway, and explore other available blocks, at !adminbuildblock.', array('!goaway' => l('Make this message go away', 'admin/structure/block'), '!adminbuildblock' => l('admin/structure/block', 'admin/structure/block'))) . '</p>';
+          $block['subject'] = t('Welcome to your Stanford Sites website');
+          $block['content'] = $body;
+        }
       return $block;
   }
 }
