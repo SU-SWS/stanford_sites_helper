@@ -1,6 +1,6 @@
 <?php
 function stanford_sites_helper_install() {
-  stanford_sites_helper_firstnode();
+  //stanford_sites_helper_firstnode();
 }
 
 function stanford_sites_helper_firstnode() {
