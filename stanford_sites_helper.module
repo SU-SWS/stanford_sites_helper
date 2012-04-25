@@ -90,12 +90,3 @@ function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $contex
     $settings['scayt_autoStartup'] = FALSE;
   }
 }
-
-/*
- * Return content for default front page.
- */
-function stanford_sites_helper_frontpage() {
-  $output = 'Here are the steps to take.';
-  return $output;
-}
-
