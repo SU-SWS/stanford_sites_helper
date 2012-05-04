@@ -1,7 +1,0 @@
-/**
- * We are overriding the default "Welcome to Your Drupal Website" text, so we
- * do want display: none here.
- */
-#first-time {
-  display: none;
-}
