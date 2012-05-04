@@ -1,0 +1,50 @@
+<?php
+
+/*
+ * @file 
+ * Overrides the 'Welcome to Your Drupal Site' instructions with 'Getting Started' 
+ * instructions customized for the Stanford Sites platform
+ */
+
+/**
+ * Implements hook_init().
+ */
+function stanford_sites_firststeps_init() {
+  $path = drupal_get_path('module', 'stanford_sites_firststeps') . '/stanford-sites-firststeps.css';
+  drupal_add_css($path);
+}
+
+/**
+* Implementation of hook_block().
+*/
+function stanford_sites_firststeps_block($op = 'list', $delta = 0) {
+  $block = array();
+  switch ($op) {
+    case 'list':
+      $blocks['firststeps']['info'] = t('Stanford Sites Welcome Text');
+      $blocks['firststeps']['status'] = 1;
+      $blocks['firststeps']['region'] = 'content';
+      $blocks['firststeps']['visibility'] = 1;
+      $blocks['firststeps']['pages'] = "<front>\nuser";
+      return $blocks;
+    case 'view':
+      switch ($delta) {
+        case 'firststeps':
+          $body = '<h3>' . t('Where do I start?') . '</h3>';
+          $body .= '<ol>';
+          $body .= '<li>' . t("If you haven't already, !login. ", array('!login' => l('Log in', 'user'))) . t('Your user name is <strong>admin</strong>, and you should have selected a password when you created the site.') . '</li>';
+          $body .= '<li>' . t('Next, !modules to enable additional functionality.', array('!modules' => l('visit the modules page', 'admin/build/modules'))) . '</li>';
+          $body .= '<li>' . t('Then, !themes to choose a "look and feel" for your site. ', array('!themes' => l('go to the theme configuration page', 'admin/build/themes')));
+          $body .= t('<strong>Stanford Basic</strong> is a highly-customizable, mobile-aware theme that is available to the entire Stanford community. ');
+          $body .= t('<strong>Stanford Modern</strong> is available by default for department installs, and !byrequest for group installs', array('!byrequest' => l('by request', 'https://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=stanfordmodern'))) . '</li>';
+          $body .= '<li>' . t('Finally, !createcontent! ', array('!createcontent' => l('start creating content', 'node/add'))) . t('The default site homepage is a "river of news" format. ');
+          $body .= t('You can !changehomepage at any time.', array('!changehomepage' => l('change the default homepage', 'admin/settings/site-information'))) . '</li>';
+          $body .= '</ol>';
+          $body .= '<p>' . t('This message is in a <strong>block</strong>. ');
+          $body .= t('!goaway, and explore other available blocks, at !adminbuildblock.', array('!goaway' => l('Make this message go away', 'admin/build/block'), '!adminbuildblock' => l('admin/build/block', 'admin/build/block'))) . '</p>';
+          $block['subject'] = t('Welcome to your Stanford Sites website');
+          $block['content'] = $body;
+        }
+      return $block;
+  }
+}
