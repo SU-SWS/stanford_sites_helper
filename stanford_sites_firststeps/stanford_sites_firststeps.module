@@ -48,3 +48,11 @@ function stanford_sites_firststeps_block($op = 'list', $delta = 0) {
       return $block;
   }
 }
+
+/**
+ * Implements hook_enable().
+ */
+function stanford_sites_firststeps_enable() {
+  //Populate the {blocks} table
+  _block_rehash();
+}
