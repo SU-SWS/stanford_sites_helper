@@ -54,9 +54,5 @@ function stanford_sites_firststeps_block($op = 'list', $delta = 0) {
  */
 function stanford_sites_firststeps_enable() {
   //Populate the {blocks} table
-  _block_rehash('garland');
-  _block_rehash('stanford_basic');
-  _block_rehash('stanfordmodern');
-  _block_rehash('tao');
-  _block_rehash('cube');
+  block_flush_caches();
 }
