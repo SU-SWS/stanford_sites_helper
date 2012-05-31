@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 6.x-1.0-alpha4, 2012-05-31
+------------------------------------------------
+Bug fix in stanford_sites_firststeps module that prevented user login block from appearing.
+
 Stanford Sites Helper 6.x-1.0-alpha3, 2012-05-21
 ------------------------------------------------
 Bug fix in stanford_sites_firststeps module to show
