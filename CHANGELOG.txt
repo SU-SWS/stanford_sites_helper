@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-alpha3, 2012-07-16
+------------------------------------------------
+-No functional changes; release fixes version mismatch
+
 Stanford Sites Helper 7.x-1.0-alpha2, 2012-04-06
 ------------------------------------------------
 -Added "first steps" block on front page
