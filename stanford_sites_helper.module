@@ -30,30 +30,6 @@ function stanford_sites_helper_box($title, $content, $region = 'main') {
   return $output;
 }
 
-/**
-* Implementation of hook_block().
-*/
-function stanford_sites_helper_block($op = 'list', $delta = 0) {
-  $block = array();
-  switch ($op) {
-    case 'list':
-      $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
-      $blocks['helplinks']['status'] = 1;
-      $blocks['helplinks']['region'] = 'header';
-      $blocks['helplinks']['visibility'] = 1;
-      $blocks['helplinks']['pages'] = "admin\nadmin/*";
-      return $blocks;
-    case 'view':
-      switch ($delta) {
-        case 'helplinks':
-          $block['subject'] = t('Get Help');
-          $block['content'] = t('Problems using this service? Submit a !helpsu.', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=webdesign')));
-          break;
-        }
-      return $block;
-  }
-}
-
 /*
  * Fix spell check as you type (scayt) autostart behavior.
  * See http://drupal.org/node/817894 for reference.
