@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 6.x-1.0-alpha5, 2012-08-09
+------------------------------------------------
+Removed help links block.
+
 Stanford Sites Helper 6.x-1.0-alpha4, 2012-05-31
 ------------------------------------------------
 Bug fix in stanford_sites_firststeps module that prevented user login block from appearing.
