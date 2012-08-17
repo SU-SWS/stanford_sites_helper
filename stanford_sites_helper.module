@@ -88,7 +88,7 @@ function stanford_sites_helper_backup_migrate_profiles(&$profiles) {
   $out['stanford_sites_default'] = backup_migrate_crud_create_item('profile', array(
     'profile_id' => 'stanford_sites_default',
     'name' => 'Stanford Sites Profile',
-    'filename' => '[site:name]-files',
+    'filename' => '[site:name]',
     'append_timestamp' => '1',
     'timestamp_format' => 'Y-m-d\\TH-i-s',
     'filters' => 
