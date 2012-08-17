@@ -76,6 +76,92 @@ function stanford_sites_helper_block_view($delta) {
 }
 
 /*
+ * Implements hook_backup_migrate_profiles().
+ */
+function stanford_sites_helper_backup_migrate_profiles(&$profiles) {
+  $out = array();
+
+  // Get the stanford_sites_default profile.
+  $out['stanford_sites_default'] = backup_migrate_crud_create_item('profile', array(
+    'profile_id' => 'stanford_sites_default',
+    'name' => 'Stanford Sites Profile',
+    'filename' => '[site:name]-files',
+    'append_timestamp' => '1',
+    'timestamp_format' => 'Y-m-d\\TH-i-s',
+    'filters' => 
+    array (
+      'compression' => 'gzip',
+      'notify_success_enable' => 0,
+      'notify_success_email' => '',
+      'notify_failure_enable' => 0,
+      'notify_failure_email' => '',
+      'utils_site_offline' => 0,
+      'utils_site_offline_message' => 'This site is currently under maintenance. We should be back shortly. Thank you for your patience.',
+      'utils_description' => '',
+      'destinations' => 
+      array (
+        'db' => 
+        array (
+          'exclude_tables' => 
+          array (
+          ),
+          'nodata_tables' => 
+          array (
+            'cache' => 'cache',
+            'cache_admin_menu' => 'cache_admin_menu',
+            'cache_block' => 'cache_block',
+            'cache_bootstrap' => 'cache_bootstrap',
+            'cache_field' => 'cache_field',
+            'cache_filter' => 'cache_filter',
+            'cache_form' => 'cache_form',
+            'cache_image' => 'cache_image',
+            'cache_menu' => 'cache_menu',
+            'cache_page' => 'cache_page',
+            'cache_path' => 'cache_path',
+            'cache_update' => 'cache_update',
+            'cache_views' => 'cache_views',
+            'cache_views_data' => 'cache_views_data',
+            'search_dataset' => 'search_dataset',
+            'search_index' => 'search_index',
+            'search_total' => 'search_total',
+            'sessions' => 'sessions',
+            'watchdog' => 'watchdog',
+          ),
+          'utils_lock_tables' => 0,
+          'use_mysqldump' => 0,
+        ),
+        'files' => 
+        array (
+          'exclude_filepaths' => 'backup_migrate
+  styles
+  css
+  js
+  ctools
+  .htaccess
+  tmp
+  private',
+        ),
+        'files_private' => 
+        array (
+          'exclude_filepaths' => 'backup_migrate
+  styles
+  css
+  js
+  ctools
+  .htaccess
+  tmp',
+        ),
+      ),
+      'encryption' => 'none',
+      'utils_disable_query_log' => true,
+    ),
+  )
+);
+
+  return $out;
+  
+}
+/*
  * @todo determine if still needed in D7
  * Fix spell check as you type (scayt) autostart behavior.
  * See http://drupal.org/node/817894 for reference.
