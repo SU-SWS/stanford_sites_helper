@@ -79,6 +79,9 @@ function stanford_sites_helper_block_view($delta) {
  * Implements hook_backup_migrate_profiles().
  */
 function stanford_sites_helper_backup_migrate_profiles(&$profiles) {
+  //set this profile as default
+  variable_set('backup_migrate_profile_id', 'stanford_sites_default');
+  
   $out = array();
 
   // Get the stanford_sites_default profile.
