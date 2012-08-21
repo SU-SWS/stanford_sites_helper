@@ -165,3 +165,13 @@ function stanford_sites_helper_backup_migrate_profiles(&$profiles) {
 
 }
 
+/*
+ * Fix spell check as you type (scayt) autostart behavior.
+ * See http://drupal.org/node/817894 for reference.
+ */
+function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if ($context['profile']->editor == 'ckeditor') {
+    $settings['scayt_autoStartup'] = FALSE;
+  }
+}
+
