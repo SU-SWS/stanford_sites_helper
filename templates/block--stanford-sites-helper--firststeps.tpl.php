@@ -1,10 +1,29 @@
-<div id="welcome">
+<?php
+/*
+ * @file Template file for Quickstart/First Steps block.
+ */
+
+/*
+ * Variables
+ */
+$images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
+
+?>
+<div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+
+  <?php print render($title_prefix); ?>
+<?php if ($block->subject): ?>
+  <h2<?php print $title_attributes; ?>><?php print $block->subject ?></h2>
+<?php endif;?>
+  <?php print render($title_suffix); ?>
+  
+  <div id="welcome">
   <h1>Quick steps to get started:</h1>
   <div id="quickstart">
     <ol>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="images/plant.png" alt="plant"> <span class="fieldset-legend">Change your site's name and information</span></legend>
+          <legend><img src="<?php print $images ?>plant.png" alt="plant"> <span class="fieldset-legend">Change your site's name and information</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">You can rename your site, add a slogan, or set an existing page to be the homepage of your site by visiting the site information page.</p>
             <p><a href="#" class="btn">Edit Your Site's Information</a></p>

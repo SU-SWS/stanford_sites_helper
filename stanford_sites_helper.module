@@ -9,19 +9,28 @@
  * Implements hook_init().
  */
 function stanford_sites_helper_init() {
-  $path = drupal_get_path('module', 'stanford_sites_helper') . '/style.css';
+  $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
   drupal_add_css($path);
 }
 /*
  * Implements hook_theme_registry_alter().
  */
 function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
-  $theme_registry['search_results']['theme paths'] = array(0 => drupal_get_path('module', 'stanford_sites_helper'));
-  $theme_registry['search_results']['theme path'] = drupal_get_path('module', 'stanford_sites_helper');
-  $theme_registry['search_results']['path'] = drupal_get_path('module', 'stanford_sites_helper');
+  $theme_registry['search_results']['theme paths'] = array(0 => drupal_get_path('module', 'stanford_sites_helper') . '/templates');
+  $theme_registry['search_results']['theme path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
+  $theme_registry['search_results']['path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
   $theme_registry['search_results']['template'] = 'search-results';
+  $theme_registry['block']['theme path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
+  dsm($theme_registry['block']);
 }
 
+/*
+ * Implements template_preprocess_block().
+ */
+function stanford_sites_helper_preprocess_block(&$vars) {
+//  $vars['theme_hook_suggestions'][] = 'block__stanford_sites_helper__firststeps';
+//  dsm($vars);
+}
 /**
  * Returns a translatable string of help text for a search that returns no results.
  */
@@ -63,10 +72,13 @@ function stanford_sites_helper_block_view($delta) {
       $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=sites')));
       break;
     case 'firststeps':
-      $file = drupal_get_path('module', 'stanford_sites_helper') . '/firststeps.html';
+      $file = drupal_get_path('module', 'stanford_sites_helper') . '/block--stanford--sites--helper--firststeps.tpl.php';
       $body = file_get_contents($file);
+      $body = 'foo';
       $block['subject'] = t('Welcome to your Stanford Sites website');
       $block['content'] = $body;
+      drupal_add_js('misc/collapse.js');
+      drupal_add_js('misc/form.js');
       break;
   }
   return $block;
