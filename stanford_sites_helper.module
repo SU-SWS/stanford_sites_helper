@@ -64,7 +64,7 @@ function stanford_sites_helper_block_view($delta) {
       break;
     case 'firststeps':
       $file = drupal_get_path('module', 'stanford_sites_helper') . '/firststeps.html';
-      $body = file_get_contents($path);
+      $body = file_get_contents($file);
       $block['subject'] = t('Welcome to your Stanford Sites website');
       $block['content'] = $body;
       break;
