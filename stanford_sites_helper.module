@@ -14,11 +14,15 @@ function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
   $theme_registry['search_results']['path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
   $theme_registry['search_results']['template'] = 'search-results';
 //  dsm($theme_registry);
-  $theme_registry['block']['theme paths'] = array(0 => drupal_get_path('module', 'stanford_sites_helper') . '/templates');
+//  dsm($theme_registry['block']);
+//  $theme_registry['block']['theme paths'] = array(0 => drupal_get_path('module', 'stanford_sites_helper') . '/templates');
   $theme_registry['block']['theme path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
   $theme_registry['block']['path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
-  $theme_registry['block']['template'] = 'block';
-//  dsm($theme_registry['block']);
+  $theme_registry['block__stanford_sites_helper__firststeps']['theme paths'] = array(0 => drupal_get_path('module', 'stanford_sites_helper') . '/templates');
+  $theme_registry['block__stanford_sites_helper__firststeps']['theme path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
+  $theme_registry['block__stanford_sites_helper__firststeps']['path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
+  $theme_registry['block__stanford_sites_helper__firststeps']['template'] = 'firststeps';
+  dsm($theme_registry);
 }
 
 /*
@@ -26,7 +30,7 @@ function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
  */
 function stanford_sites_helper_preprocess_block(&$variables) {
 //  $variables['theme_hook_suggestions'][] = 'block--stanford-sites-helper--firststeps';
-  dsm($variables);
+//  dsm($variables);
 }
 /**
  * Returns a translatable string of help text for a search that returns no results.
