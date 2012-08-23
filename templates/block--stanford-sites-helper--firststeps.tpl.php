@@ -7,7 +7,21 @@
  * Variables
  */
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
-
+$edit_site_info = l(t("Edit Your Site's Information"), 'admin/config/system/site-information', array('attributes' => array('class' => array('btn'))));
+$create_new_page = l(t("Create a New Page"), 'node/add/page', array('attributes' => array('class' => array('btn'))));
+$learn_more_content_types = l(t("Learn more about content types in Drupal"), 'http://drupal.org/node/21947');
+$edit_main_menu = l(t("Edit Your Main Menu"), 'admin/structure/menu/manage/main-menu', array('attributes' => array('class' => array('btn'))));
+$create_new_menu = l(t("Create a New Menu"), 'admin/structure/menu/add', array('attributes' => array('class' => array('btn'))));
+$learn_more_menus = l(t("Learn more about menus in Drupal"), 'http://drupal.org/documentation/modules/menu');
+$modules = l(t("Visit Your Modules"), 'admin/modules', array('attributes' => array('class' => array('btn'))));
+$learn_more_modules = l(t("Learn more about the available modules on Stanford Sites"), 'https://itservices.stanford.edu/service/web/stanfordsites/userguide');
+$edit_theme_settings = l(t("Edit Your Theme Settings"), 'admin/appearance/settings', array('attributes' => array('class' => array('btn'))));
+$create_css_injector = l(t("Create a CSS Injector rule"), 'admin/config/development/css-injector/add');
+$add_user = l(t("Add a new user"), 'admin/people/create');
+$add_role = l(t("Create a new user role"), 'admin/people/permissions/roles');
+$edit_permissions = l(t("Edit permissions"), 'admin/people/permissions');
+$edit_blocks = l(t("Adjust the layout of your blocks"), 'admin/structure/block');
+$create_view = l(t("Create a new View"), 'admin/structure/views/add');
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
@@ -26,8 +40,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
           <legend><img src="<?php print $images ?>plant.png" alt="plant"> <span class="fieldset-legend">Change your site's name and information</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">You can rename your site, add a slogan, or set an existing page to be the homepage of your site by visiting the site information page.</p>
-            <p> <?php l((t"Edit Your Site's Information"), 'admin/config/system/site-information', array('class' => array("btn"))); ?> </p>
-            <p><a href="#" class="btn">Edit Your Site's Information</a></p>
+            <p> <?php print $edit_site_info; ?> </p>
+            
           </div>
         </fieldset>
       </li>
@@ -35,9 +49,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
         <fieldset class="field-group-fieldset collapsible collapsed">
           <legend><img src="<?php print $images ?>pencil.png" alt="pencil"> <span class="fieldset-legend">Add content to your homepage</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">Use your homepage to add a static welcome or introduction to your site. If you want a blog as part of your site (or on your site's homepage), visit the Modules page to enable the Stanford Blog feature.</p>
+            <p class="intro">Use your homepage to add a static welcome or introduction to your site.</p>
             <p><a href="#" class="btn">Edit Your Homepage</a></p>
-            <p><a href="#">Learn more about the Stanford Blog feature</a></p>
           </div>
         </fieldset>
       </li>
@@ -46,8 +59,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
           <legend><img src="<?php print $images ?>plus.png" alt="plus"> <span class="fieldset-legend">Create a new page on your site</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Do you want an &quot;about&quot; or other page  on your site? When creating new pages, you can directly add them to the Main Menu navigation in the Menu Settings section of the form.</p>
-            <p><a href="#" class="btn">Create a New Page</a></p>
-            <p><a href="#">Learn more about content types in Drupal</a></p>
+            <p><?php print $create_new_page; ?></p>
+            <p><?php print $learn_more_content_types; ?></p>
           </div>
         </fieldset>
       </li>
@@ -61,8 +74,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
           <legend><img src="<?php print $images ?>menu.png" alt="menu"> <span class="fieldset-legend">Edit your  navigation menus</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Drupal comes pre-packaged with a Main menu navigation  to which you can add your existing pages. First create new pages, and then add them to your menu. You can create a new menu and add items to it by visiting the Menus page. Move your menus around using the Blocks page.</p>
-            <p><a href="#" class="btn">Edit Your Main Menu</a> <a href="#" class="btn">Create a New Menu</a></p>
-            <p><a href="#">Learn more about menus in Drupal</a></p>
+            <p><?php print $edit_main_menu; ?><?php print $create_new_menu; ?></p>
+            <p><?php print $learn_more_menus; ?></p>
           </div>
         </fieldset>
       </li>
@@ -71,8 +84,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
           <legend><img src="<?php print $images ?>gear.png" alt="gear"> <span class="fieldset-legend">Add functionality and features</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Want to add a blog to your site? Looking to do more with your site? Enable functionality on the Modules page, but first you might want to learn what the available modules do and why you might want to enable them.</p>
-            <p><a href="#" class="btn">Visit Your Modules</a></p>
-            <p><a href="#">Learn more about the available modules on Stanford Sites</a></p>
+            <p><?php print $modules; ?></p>
+            <p><?php print $learn_more_modules; ?></p>
           </div>
         </fieldset>
       </li>
@@ -81,8 +94,8 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
           <legend><img src="<?php print $images ?>brush.png" alt="brush"> <span class="fieldset-legend">Edit the look and feel of your site</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Your site comes pre-packaged with the Stanford Basic theme. Edit the settings for Stanford Basic to add a background image and change the color scheme. If you're looking to do more custom CSS for your site, use the CSS Injector module.</p>
-            <p><a href="#" class="btn">Edit My Theme's Settings</a></p>
-            <p><a href="#">Learn more about CSS Injector</a></p>
+            <p><?php print $edit_theme_settings; ?></p>
+            <p><?php print $create_css_injector; ?></p>
           </div>
         </fieldset>
       </li>
@@ -91,15 +104,11 @@ $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
   <h1>Going further:</h1>
   <div id="shortcuts">
     <ul>
-      <li><a href="#">Add an image</a></li>
-      <li><a href="#">Add a link</a></li>
-      <li><a href="#">Add a blog</a></li>
-      <li><a href="#">Add a slideshow</a></li>
-      <li><a href="#">Add a new user</a></li>
-      <li><a href="#">Define a new user role / access</a></li>
-      <li><a href="#">Edit permissions</a></li>
-      <li><a href="#">Adjust the layout of your blocks</a></li>
-      <li><a href="#">Create a view</a></li>
+      <li><?php print $add_user; ?></li>
+      <li><?php print $add_role; ?></li>
+      <li><?php print $edit_permissions; ?></li>
+      <li><?php print $edit_blocks; ?></li>
+      <li><?php print $create_view; ?></li>
     </ul>
   </div>
 </div>
