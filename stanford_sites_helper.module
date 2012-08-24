@@ -55,7 +55,7 @@ function stanford_sites_helper_block_info() {
   $blocks['firststeps']['status'] = 1;
   $blocks['firststeps']['region'] = 'content';
   $blocks['firststeps']['visibility'] = BLOCK_VISIBILITY_LISTED;
-  $blocks['firststeps']['pages'] = "<front>\nuser";
+  $blocks['firststeps']['pages'] = "<front>\ngetting-started";
   return $blocks;
 }
 
@@ -70,6 +70,7 @@ function stanford_sites_helper_block_view($delta) {
       break;
     case 'firststeps':
       $block['subject'] = t('Welcome to your Stanford Sites website');
+      $block['content'] = '.';
       drupal_add_js('misc/collapse.js');
       drupal_add_js('misc/form.js');
       $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper-firststeps.css';
@@ -79,6 +80,26 @@ function stanford_sites_helper_block_view($delta) {
   return $block;
 }
 
+/*
+ * Implements hook_menu().
+ */
+function stanford_sites_helper_menu() {
+  $items['getting-started'] = array(
+    'title' => t('Getting Started'),
+    'page callback' => 'stanford_sites_helper_getting_started',
+    'type' => MENU_NORMAL_ITEM,
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/*
+ * Page callback.
+ */
+function stanford_sites_helper_getting_started() {
+  return(' ');
+}
 /*
  * Implements hook_backup_migrate_profiles().
  */
