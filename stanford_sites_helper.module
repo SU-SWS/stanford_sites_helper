@@ -69,11 +69,7 @@ function stanford_sites_helper_block_view($delta) {
       $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=sites')));
       break;
     case 'firststeps':
-      $file = drupal_get_path('module', 'stanford_sites_helper') . '/block--stanford--sites--helper--firststeps.tpl.php';
-      $body = file_get_contents($file);
-      $body = 'foo';
       $block['subject'] = t('Welcome to your Stanford Sites website');
-      $block['content'] = $body;
       drupal_add_js('misc/collapse.js');
       drupal_add_js('misc/form.js');
       $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper-firststeps.css';
