@@ -1,0 +1,27 @@
+<?php
+/*
+ * @file Install functions for Stanford Sites Helper module
+ */
+
+/*
+ * Implements hook_install().
+ */
+function stanford_sites_helper_install() {
+  $block_role = db_insert('block_role')
+    ->fields(array(
+        'module' => 'stanford_sites_helper',
+        'delta' => 'firststeps',
+        'rid' => 3,
+    ))
+    ->execute();
+}
+
+/*
+ * Implements hook_uninstall().
+ */
+function stanford_sites_helper_uninstall() {
+  $block_role = db_delete('block_role')
+  ->condition('module', 'stanford_sites_helper')
+  ->condition('delta', 'firststeps')
+  ->execute();
+}
