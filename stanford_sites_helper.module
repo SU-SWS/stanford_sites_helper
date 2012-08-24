@@ -6,6 +6,15 @@
  */
 
 /*
+ * Implements hook_init().
+ */
+function stanford_sites_helper_init() {
+  $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
+  drupal_add_css($path);
+ 
+}
+
+/*
  * Implements hook_theme_registry_alter().
  */
 function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
@@ -67,7 +76,7 @@ function stanford_sites_helper_block_view($delta) {
       $block['content'] = $body;
       drupal_add_js('misc/collapse.js');
       drupal_add_js('misc/form.js');
-      $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
+      $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper-firststeps.css';
       drupal_add_css($path);
       break;
   }

@@ -32,7 +32,7 @@ $create_view = l(t("Create a new View"), 'admin/structure/views/add');
   <?php print render($title_suffix); ?>
   
   <div id="welcome">
-  <h1>Quick steps to get started:</h1>
+  <h3>Quick steps to get started:</h3>
   <div id="quickstart">
     <ol>
       <li>
@@ -66,7 +66,7 @@ $create_view = l(t("Create a new View"), 'admin/structure/views/add');
       </li>
     </ol>
   </div>
-  <h1>More advanced tasks:</h1>
+  <h3>More advanced tasks:</h3>
   <div id="nextsteps">
     <ol>
       <li>
@@ -101,7 +101,7 @@ $create_view = l(t("Create a new View"), 'admin/structure/views/add');
       </li>
     </ol>
   </div>
-  <h1>Going further:</h1>
+  <h3>Going further:</h3>
   <div id="shortcuts">
     <ul>
       <li><?php print $add_user; ?></li>
