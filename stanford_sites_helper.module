@@ -86,7 +86,8 @@ function stanford_sites_helper_block_view($delta) {
 function stanford_sites_helper_menu() {
   $items['getting-started'] = array(
     'title' => t('Getting Started'),
-    'page callback' => 'stanford_sites_helper_getting_started',
+    'page callback' => 'theme',
+    'page arguments' => array('firststeps_template'),
     'type' => MENU_NORMAL_ITEM,
     'access callback' => 'user_access',
     'access arguments' => array('administer site configuration'),
@@ -97,8 +98,12 @@ function stanford_sites_helper_menu() {
 /*
  * Page callback.
  */
-function stanford_sites_helper_getting_started() {
-  return(' ');
+function stanford_sites_helper_theme($existing, $type, $theme, $path) {
+  return array(
+    'firststeps_template' => array(
+      'template' => 'templates/firststeps',
+    ),
+  );
 }
 /*
  * Implements hook_backup_migrate_profiles().
