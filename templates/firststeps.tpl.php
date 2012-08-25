@@ -22,6 +22,12 @@ $add_role = l(t("Create a new user role"), 'admin/people/permissions/roles');
 $edit_permissions = l(t("Edit permissions"), 'admin/people/permissions');
 $edit_blocks = l(t("Adjust the layout of your blocks"), 'admin/structure/block');
 $create_view = l(t("Create a new View"), 'admin/structure/views/add');
+//add css and js
+drupal_add_js('misc/collapse.js');
+drupal_add_js('misc/form.js');
+$path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper-firststeps.css';
+drupal_add_css($path);
+
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 

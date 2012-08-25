@@ -71,10 +71,6 @@ function stanford_sites_helper_block_view($delta) {
     case 'firststeps':
       $block['subject'] = t('Welcome to your Stanford Sites website');
       $block['content'] = '.';
-      drupal_add_js('misc/collapse.js');
-      drupal_add_js('misc/form.js');
-      $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper-firststeps.css';
-      drupal_add_css($path);
       break;
   }
   return $block;
