@@ -54,7 +54,7 @@ function stanford_sites_helper_block_info() {
   $blocks['firststeps']['weight'] = 10;
   $blocks['firststeps']['region'] = 'content';
   $blocks['firststeps']['visibility'] = BLOCK_VISIBILITY_LISTED;
-  $blocks['firststeps']['pages'] = "<front>\ngetting-started";
+  $blocks['firststeps']['pages'] = "<front>";
   return $blocks;
 }
 
