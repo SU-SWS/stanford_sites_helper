@@ -51,6 +51,7 @@ function stanford_sites_helper_block_info() {
   $blocks['helplinks']['pages'] = "admin\nadmin/*";
   $blocks['firststeps']['info'] = t('Stanford Sites Welcome Text');
   $blocks['firststeps']['status'] = 1;
+  $blocks['firststeps']['weight'] = 10;
   $blocks['firststeps']['region'] = 'content';
   $blocks['firststeps']['visibility'] = BLOCK_VISIBILITY_LISTED;
   $blocks['firststeps']['pages'] = "<front>\ngetting-started";
@@ -67,7 +68,7 @@ function stanford_sites_helper_block_view($delta) {
       $block['content'] = t('Problems using this service? Submit a !helpsu. <hr />', array('!helpsu' => l('HelpSU request', 'http://remedyweb.stanford.edu/helpsu/2.0/helpsu-form?pcat=sites')));
       break;
     case 'firststeps':
-      $block['subject'] = t('Welcome to your Stanford Sites website');
+      $block['subject'] = t('Quick Steps to Get Started');
       $block['content'] = '.';
       break;
   }

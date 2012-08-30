@@ -34,7 +34,7 @@ drupal_add_css($path);
 
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
-
+<hr />
   <?php print render($title_prefix); ?>
 <?php if ($block->subject): ?>
   <h2<?php print $title_attributes; ?>><?php print $block->subject ?></h2>
@@ -42,7 +42,6 @@ drupal_add_css($path);
   <?php print render($title_suffix); ?>
   
   <div id="welcome">
-  <h3>Quick steps to get started:</h3>
   <div id="quickstart">
     <ol>
       <li>
