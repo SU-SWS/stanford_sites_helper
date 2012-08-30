@@ -10,15 +10,6 @@
  */
 function stanford_sites_helper_init() {
   $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
-  drupal_add_css($path);
-  $query = db_select('users', 'u')
-    ->fields('u')
-    ->condition('access', 0, '<>');
-  $user_has_logged_in = $query->execute()->fetchAll();
-  $current_path = current_path();
-  if (!array_key_exists(0, $user_has_logged_in) && ($current_path != 'user')) {
-    drupal_goto('user');
-  }
 }
 
 /*
