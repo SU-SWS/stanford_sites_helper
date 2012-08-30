@@ -7,6 +7,7 @@
  * Implements hook_install().
  */
 function stanford_sites_helper_install() {
+  //make the firststeps block only viewable to administrator users
   $block_role = db_insert('block_role')
     ->fields(array(
         'module' => 'stanford_sites_helper',
@@ -14,6 +15,23 @@ function stanford_sites_helper_install() {
         'rid' => 3,
     ))
     ->execute();
+  
+  //only do this if we haven't done it before
+  $stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
+  if(!isset($stanford_sites_helper_node)) {
+    $node = (object) NULL;
+    $node->type = 'page';
+    $node->uid = 1;
+    $node->status = 1;
+    $node->language = 'und';
+    $node->title = t("Home");
+    $node->body['und'][0]['value'] = t('This is sample dummy content.');
+    node_save($node);
+    $nid = $node->nid;
+    variable_set('stanford_sites_helper_node', $nid);
+    variable_set('site_frontpage', 'node/' . $nid);
+  }
+  
 }
 
 /*

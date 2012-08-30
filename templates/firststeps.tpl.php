@@ -7,6 +7,8 @@
  * Variables
  */
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
+$stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
+$edit_homepage = l(t("Edit Your Homepage Content"), 'node/' . $stanford_sites_helper_node . '/edit', array('attributes' => array('class' => array('btn'))));
 $edit_site_info = l(t("Edit Your Site's Information"), 'admin/config/system/site-information', array('attributes' => array('class' => array('btn'))));
 $create_new_page = l(t("Create a New Page"), 'node/add/page', array('attributes' => array('class' => array('btn'))));
 $learn_more_content_types = l(t("Learn more about content types in Drupal"), 'http://drupal.org/node/21947');
@@ -43,20 +45,20 @@ drupal_add_css($path);
     <ol>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>plant.png" alt="plant" /> <span class="fieldset-legend">Change your site's name and information</span></legend>
+          <legend><img src="<?php print $images ?>pencil.png" alt="pencil" /> <span class="fieldset-legend">Edit your homepage</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">You can rename your site, add a slogan, or set an existing page to be the homepage of your site by visiting the site information page.</p>
-            <p> <?php print $edit_site_info; ?> </p>
-            
+            <p class="intro">Use your homepage to add a static welcome or introduction to your site.</p>
+            <p><?php print $edit_homepage; ?></p>
           </div>
         </fieldset>
       </li>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>pencil.png" alt="pencil" /> <span class="fieldset-legend">Add content to your homepage</span></legend>
+          <legend><img src="<?php print $images ?>plant.png" alt="plant" /> <span class="fieldset-legend">Change your site's name and information</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">Use your homepage to add a static welcome or introduction to your site.</p>
-            <p><a href="#" class="btn">Edit Your Homepage</a></p>
+            <p class="intro">You can rename your site, add a slogan, or set an existing page to be the homepage of your site by visiting the site information page.</p>
+            <p> <?php print $edit_site_info; ?> </p>
+            
           </div>
         </fieldset>
       </li>
@@ -89,7 +91,7 @@ drupal_add_css($path);
         <fieldset class="field-group-fieldset collapsible collapsed">
           <legend><img src="<?php print $images ?>gear.png" alt="gear" /> <span class="fieldset-legend">Add functionality and features</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">Want to add a blog to your site? Looking to do more with your site? Enable functionality on the Modules page, but first you might want to learn what the available modules do and why you might want to enable them.</p>
+            <p class="intro">Want to add a contact form to your site? Looking to do more with your site? Enable functionality on the Modules page, but first you might want to learn what the available modules do and why you might want to enable them.</p>
             <p><?php print $modules; ?></p>
             <p><?php print $learn_more_modules; ?></p>
           </div>
