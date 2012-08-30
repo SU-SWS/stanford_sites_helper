@@ -14,6 +14,9 @@ $create_new_page = l(t("Create a New Page"), 'node/add/page', array('attributes'
 $learn_more_content_types = l(t("Learn more about content types in Drupal"), 'http://drupal.org/node/21947');
 $edit_main_menu = l(t("Edit Your Main Menu"), 'admin/structure/menu/manage/main-menu', array('attributes' => array('class' => array('btn'))));
 $create_new_menu = l(t("Create a New Menu"), 'admin/structure/menu/add', array('attributes' => array('class' => array('btn'))));
+$getting_started = l(t("Getting Started"), 'getting-started');
+$edit_firststeps_block = l(t("Hide This Block"), 'admin/structure/block/manage/stanford_sites_helper/firststeps/configure', array('attributes' => array('class' => array('btn'))));
+$edit_blocks = l(t("Configure All Blocks"), 'admin/structure/block', array('attributes' => array('class' => array('btn'))));
 $learn_more_menus = l(t("Learn more about menus in Drupal"), 'http://drupal.org/documentation/modules/menu');
 $modules = l(t("Visit Your Modules"), 'admin/modules', array('attributes' => array('class' => array('btn'))));
 $learn_more_modules = l(t("Learn more about the available modules on Stanford Sites"), 'https://itservices.stanford.edu/service/web/stanfordsites/userguide');
@@ -22,7 +25,6 @@ $create_css_injector = l(t("Create a CSS Injector rule"), 'admin/config/developm
 $add_user = l(t("Add a new user"), 'admin/people/create');
 $add_role = l(t("Create a new user role"), 'admin/people/permissions/roles');
 $edit_permissions = l(t("Edit permissions"), 'admin/people/permissions');
-$edit_blocks = l(t("Adjust the layout of your blocks"), 'admin/structure/block');
 $create_view = l(t("Create a new View"), 'admin/structure/views/add');
 //add css and js
 drupal_add_js('misc/collapse.js');
@@ -45,7 +47,7 @@ drupal_add_css($path);
     <ol>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>pencil.png" alt="pencil" /> <span class="fieldset-legend">Edit your homepage</span></legend>
+          <legend><img src="<?php print $images ?>pencil.png" alt="pencil" /> <span class="fieldset-legend">Edit your homepage content</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Use your homepage to add a static welcome or introduction to your site.</p>
             <p><?php print $edit_homepage; ?></p>
@@ -72,6 +74,17 @@ drupal_add_css($path);
           </div>
         </fieldset>
       </li>
+      <li>
+        <fieldset class="field-group-fieldset collapsible collapsed">
+          <legend><img src="<?php print $images ?>gear.png" alt="gear" /> <span class="fieldset-legend">Get rid of this &quot;Quick Steps&quot; content</span></legend>
+          <div class="fieldset-wrapper">
+            <p class="intro">Want to make these &quot;Quick Steps&quot; go away?</p>
+            <p>Drupal uses a system called <strong>&quot;blocks&quot;</strong> to layout content on your website. (This Quick Steps are in a block, but even if you disable it, you can always get back to it at <?php print $getting_started; ?>.)</p>
+            <p><?php print $edit_firststeps_block; ?><?php print $edit_blocks; ?></p>
+          </div>
+        </fieldset>
+      </li>
+            
     </ol>
   </div>
   <h3>More advanced tasks:</h3>
@@ -115,7 +128,6 @@ drupal_add_css($path);
       <li><?php print $add_user; ?></li>
       <li><?php print $add_role; ?></li>
       <li><?php print $edit_permissions; ?></li>
-      <li><?php print $edit_blocks; ?></li>
       <li><?php print $create_view; ?></li>
     </ul>
   </div>
