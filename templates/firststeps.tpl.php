@@ -75,7 +75,7 @@ drupal_add_css($path);
       </li>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>gear.png" alt="gear" /> <span class="fieldset-legend">Get rid of this &quot;Quick Steps&quot; content</span></legend>
+          <legend><img src="<?php print $images ?>remove.png" alt="minus" /> <span class="fieldset-legend">Get rid of this &quot;Quick Steps&quot; content</span></legend>
           <div class="fieldset-wrapper">
             <p class="intro">Want to make these &quot;Quick Steps&quot; go away?</p>
             <p>Drupal uses a system called <strong>&quot;blocks&quot;</strong> to layout content on your website. (This Quick Steps are in a block, but even if you disable it, you can always get back to it at <?php print $getting_started; ?>.)</p>
