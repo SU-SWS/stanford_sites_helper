@@ -11,9 +11,9 @@
 #welcome ol li fieldset {margin: 0; padding: 0; border: none;}
 #welcome ol li .fieldset-legend {margin: 0 0 0 55px; color: #333; background-image: none; height: 59px;}
 #welcome ol li a.fieldset-title {display: block; font-size: 18px; line-height: 35px; color: #333; text-decoration: none; background: url("../images/open.png") no-repeat scroll 98% center #F0F0F0; height: 39px; padding: 10px; border-radius: 10px;}
-#welcome ol li a.fieldset-title:hover, #welcome ol li a.fieldset-title:active, #welcome ol li a.fieldset-title:focus {background: #e4e4e4; color: #333;}
-#welcome ol li a.fieldset-title:focus {background:#F0F0F0;}
-#welcome ol li .fieldset-wrapper {background: #eee; margin: -10px 0 10px 70px; padding: 10px; background: #f0f0f0; border-radius:0 0 10px 10px;}
+#welcome ol li a.fieldset-title:hover, #welcome ol li a.fieldset-title:active, #welcome ol li a.fieldset-title:focus {background:  url("../images/open.png") no-repeat scroll 98% center #e4e4e4; color: #333;}
+#welcome ol li a.fieldset-title:focus {background: url("../images/open.png") no-repeat scroll 98% center #F0F0F0;}
+#welcome ol li .fieldset-wrapper {background: #eee; margin: 0px 0px 10px 70px; padding: 10px; background: #f0f0f0; border-radius:0 0 10px 10px; position: relative; top: -10px;}
 #welcome ol li .fieldset-wrapper p.intro { margin-top:0px;}
 #welcome #shortcuts ul {margin: 0; padding: 0;}
 #welcome #shortcuts ul li {margin: 0 0 0 20px;}
