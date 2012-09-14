@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-beta2, 2012-09-14
+-----------------------------------------------
+By meganem: Added plus icons to collapsible fieldsets 
+
 Stanford Sites Helper 7.x-1.0-beta2, 2012-09-10
 -----------------------------------------------
 By jbickar: added Quickstart UI and first steps
