@@ -6,6 +6,7 @@
 /*
  * Variables
  */
+$password_reset = l(t('password reset form'), 'user/password');
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
 $stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
 $edit_homepage = l(t("Edit Your Homepage Content"), 'node/' . $stanford_sites_helper_node . '/edit', array('attributes' => array('class' => array('btn'))));
@@ -34,6 +35,12 @@ drupal_add_css($path);
 
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<h2>Welcome to Your Stanford Sites Website</h2>
+  <p>You should log in via the form to the left, and then you will see instructions for getting started.</p>
+  <p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>
+  <p>If you cannot remember your password, you can reset it by entering your SUNet email address or <strong>&quot;admin&quot;</strong> in the <?php print $password_reset ?></p>
+  <p>Once you have logged in, you will be able to edit this text on your homepage.</p>
+
 <hr />
   <?php print render($title_prefix); ?>
 <?php if ($block->subject): ?>
@@ -46,10 +53,11 @@ drupal_add_css($path);
     <ol>
       <li>
         <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>pencil.png" alt="pencil" /> <span class="fieldset-legend">Edit your homepage content</span></legend>
+          <legend><img src="<?php print $images ?>plus.png" alt="plus" /> <span class="fieldset-legend">Create a new page on your site</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">Use your homepage to add a static welcome or introduction to your site.</p>
-            <p><?php print $edit_homepage; ?></p>
+            <p class="intro">Do you want an &quot;about&quot; or other page  on your site? When creating new pages, you can directly add them to the Main Menu navigation in the Menu Settings section of the form.</p>
+            <p><?php print $create_new_page; ?></p>
+            <p><?php print $learn_more_content_types; ?></p>
           </div>
         </fieldset>
       </li>
@@ -60,16 +68,6 @@ drupal_add_css($path);
             <p class="intro">You can rename your site, add a slogan, or set an existing page to be the homepage of your site by visiting the site information page.</p>
             <p> <?php print $edit_site_info; ?> </p>
             
-          </div>
-        </fieldset>
-      </li>
-      <li>
-        <fieldset class="field-group-fieldset collapsible collapsed">
-          <legend><img src="<?php print $images ?>plus.png" alt="plus" /> <span class="fieldset-legend">Create a new page on your site</span></legend>
-          <div class="fieldset-wrapper">
-            <p class="intro">Do you want an &quot;about&quot; or other page  on your site? When creating new pages, you can directly add them to the Main Menu navigation in the Menu Settings section of the form.</p>
-            <p><?php print $create_new_page; ?></p>
-            <p><?php print $learn_more_content_types; ?></p>
           </div>
         </fieldset>
       </li>
