@@ -6,7 +6,11 @@
 /*
  * Implements hook_install().
  */
-function stanford_sites_helper_install() {
+
+/*
+ * Postpone and move this functionality into a separate module at a later date.
+ * 
+ *  function stanford_sites_helper_install() {
   //find the rid for the "administrator" role
   //sometimes it's 3, sometimes it's 5
   //sometimes it's "potato"
@@ -49,15 +53,20 @@ function stanford_sites_helper_install() {
     variable_set('site_frontpage', 'node/' . $nid);
   }
   
-}
+}*/
 
 /*
  * Implements hook_uninstall().
  */
+
+/*
+ * Postpone and move this functionality into a separate module at a later date.
+ * 
+ *
 function stanford_sites_helper_uninstall() {
   //undo that voodoo that we did do
   $block_role = db_delete('block_role')
   ->condition('module', 'stanford_sites_helper')
   ->condition('delta', 'firststeps')
   ->execute();
-}
+}*/
