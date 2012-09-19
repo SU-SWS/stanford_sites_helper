@@ -36,7 +36,7 @@ drupal_add_css($path);
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 <h2>Welcome to Your Stanford Sites Website</h2>
-  <p>If you haven't already, you should log in via the form to the left, and then you will see instructions for getting started.</p>
+  <p>If you haven't already, you should log in via the form to the left.</p>
   <p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>
   <p>If you cannot remember your password, you can reset it by entering your SUNet email address or <strong>&quot;admin&quot;</strong> in the <?php print $password_reset ?></p>
   <p>Once you have logged in, you will be able to remove this text from your homepage.</p>
