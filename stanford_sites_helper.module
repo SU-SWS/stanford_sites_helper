@@ -24,6 +24,7 @@ function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
   $theme_registry['block__stanford_sites_helper__firststeps']['theme path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
   $theme_registry['block__stanford_sites_helper__firststeps']['path'] = drupal_get_path('module', 'stanford_sites_helper') . '/templates';
   $theme_registry['block__stanford_sites_helper__firststeps']['template'] = 'firststeps';
+  $theme_registry['block__stanford_sites_helper__firststeps']['type'] = 'module';
 }
 
 /**
