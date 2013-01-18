@@ -1,18 +1,18 @@
 <?php
 
-/*
+/**
  * @file
  * User interface tweaks and other modifications for the Stanford Sites platform
  */
 
-/*
+/**
  * Implements hook_init().
  */
 function stanford_sites_helper_init() {
   $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
 }
 
-/*
+/**
  * Implements hook_theme_registry_alter().
  */
 function stanford_sites_helper_theme_registry_alter(&$theme_registry) {
@@ -76,7 +76,7 @@ function stanford_sites_helper_block_view($delta) {
   return $block;
 }
 
-/*
+/**
  * Implements hook_menu().
  */
 function stanford_sites_helper_menu() {
@@ -91,7 +91,7 @@ function stanford_sites_helper_menu() {
   return $items;
 }
 
-/*
+/**
  * Page callback.
  */
 function stanford_sites_helper_theme($existing, $type, $theme, $path) {
@@ -101,7 +101,7 @@ function stanford_sites_helper_theme($existing, $type, $theme, $path) {
     ),
   );
 }
-/*
+/**
  * Implements hook_backup_migrate_profiles().
  */
 function stanford_sites_helper_backup_migrate_profiles() {
@@ -191,7 +191,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
 
 }
 
-/*
+/**
  * Fix spell check as you type (scayt) autostart behavior.
  * See http://drupal.org/node/817894 for reference.
  */
@@ -200,4 +200,3 @@ function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $contex
     $settings['scayt_autoStartup'] = FALSE;
   }
 }
-
