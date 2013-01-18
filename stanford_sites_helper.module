@@ -81,7 +81,7 @@ function stanford_sites_helper_block_view($delta) {
  */
 function stanford_sites_helper_menu() {
   $items['getting-started'] = array(
-    'title' => t('Getting Started'),
+    'title' => 'Getting Started',
     'page callback' => 'theme',
     'page arguments' => array('firststeps_template'),
     'type' => MENU_NORMAL_ITEM,
@@ -118,7 +118,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
     'append_timestamp' => '1',
     'timestamp_format' => 'Y-m-d\\TH-i-s',
     'filters' => 
-    array (
+    array(
       'compression' => 'gzip',
       'notify_success_enable' => 0,
       'notify_success_email' => '',
@@ -128,14 +128,14 @@ function stanford_sites_helper_backup_migrate_profiles() {
       'utils_site_offline_message' => 'This site is currently under maintenance. We should be back shortly. Thank you for your patience.',
       'utils_description' => '',
       'destinations' => 
-      array (
+      array(
         'db' => 
-        array (
+        array(
           'exclude_tables' => 
-          array (
+          array(
           ),
           'nodata_tables' => 
-          array (
+          array(
             'cache' => 'cache',
             'cache_admin_menu' => 'cache_admin_menu',
             'cache_block' => 'cache_block',
@@ -160,7 +160,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
           'use_mysqldump' => 0,
         ),
         'files' => 
-        array (
+        array(
           'exclude_filepaths' => 'backup_migrate
   styles
   css
@@ -171,7 +171,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
   private',
         ),
         'files_private' => 
-        array (
+        array(
           'exclude_filepaths' => 'backup_migrate
   styles
   css
