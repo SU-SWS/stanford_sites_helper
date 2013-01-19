@@ -200,3 +200,11 @@ function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $contex
     $settings['scayt_autoStartup'] = FALSE;
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_id) {
+  $message = t('If you are having difficulty resetting your password, please !submithelpsu.', array('!submithelpsu' => l('submit a HelpSU request', 'https://helpsu.stanford.edu/?pcat=sites')));
+  $form['name']['#suffix'] = $message;
+}
