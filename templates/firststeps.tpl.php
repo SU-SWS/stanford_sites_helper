@@ -6,7 +6,7 @@
 /*
  * Variables
  */
-$password_reset = l(t('password reset form'), 'user/password');
+$user_login_text = l(t('Log in with your SUNetID.'), drupal_get_path('module', 'webauth') . '/login');
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
 $stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
 $edit_homepage = l(t("Edit Your Homepage Content"), 'node/' . $stanford_sites_helper_node . '/edit', array('attributes' => array('class' => array('btn'))));
@@ -36,9 +36,7 @@ drupal_add_css($path);
 ?>
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 <h2>Welcome to Your Stanford Sites Website</h2>
-  <p>If you haven't already, you should log in via the form to the left.</p>
-  <p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>
-  <p>If you cannot remember your password, you can reset it by entering your SUNet email address or <strong>&quot;admin&quot;</strong> in the <?php print $password_reset ?></p>
+  <p><?php if(user_is_anonymous()) { print $user_login_text; }?></p>
   <p>Once you have logged in, you will be able to remove this text from your homepage.</p>
 
 <hr />
