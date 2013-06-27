@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-beta6, 2013-06-27
+-----------------------------------------------
+By jbickar: Removed language about user 1 in first steps block
+
 Stanford Sites Helper 7.x-1.0-beta5, 2013-01-18
 -----------------------------------------------
 By jbickar: fixed "undefined index 'type'" error
