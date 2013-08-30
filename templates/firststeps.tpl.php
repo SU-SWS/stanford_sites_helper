@@ -20,7 +20,7 @@ else {
   $user_login_block .= "<p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>\n";
   $user_login_block .= "<p>If you cannot remember your password, you can reset it by entering <strong>&quot;admin&quot;</strong> as the username in the " . $password_reset . ".</p>\n";
 }
-$user_login_block .= "<p>Once you have logged in, you will be able to remove this text from your homepage.</p>";
+$user_login_block .= "<p>Once you have logged in, you will be able to remove this text from your homepage.</p>\n<hr />";
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
 $stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
 $edit_homepage = l(t("Edit Your Homepage Content"), 'node/' . $stanford_sites_helper_node . '/edit', array('attributes' => array('class' => array('btn'))));
@@ -51,7 +51,7 @@ drupal_add_css($path);
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php if(user_is_anonymous()) { print $user_login_block; }?>
 
-<hr />
+
   <?php print render($title_prefix); ?>
 <?php if ($block->subject): ?>
   <h2<?php print $title_attributes; ?>><?php print $block->subject ?></h2>
