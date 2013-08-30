@@ -7,14 +7,17 @@
  * Variables
  */
 $user_login_text = l(t('Log in with your SUNetID.'), 'sites/default/webauth/login');
-$user_login_block = '<p>' . $user_login_text . '</p>';
-$password_reset = l(t('password reset form.'), 'user/password');
 // check if WMD is set to allow local Drupal logins.
 // if so, display the login text to have the user log in as user 1
-if (variable_get('webauth_allow_local') != 1) {
+$webauth_allow_local = variable_get('webauth_allow_local');
+$password_reset = l(t('password reset form'), 'user/password');
+if ($webauth_allow_local === 0) {
+  $user_login_block = '<p>' . $user_login_text . '</p>';
+}
+else {
   $user_login_block = "<p>If you haven't already, you should log in via the form to the left.</p>\n";
   $user_login_block .= "<p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>\n";
-  $user_login_block .= "<p>If you cannot remember your password, you can reset it by entering <strong>&quot;admin&quot;</strong> as the username in the " . $password_reset . "</p>\n";
+  $user_login_block .= "<p>If you cannot remember your password, you can reset it by entering <strong>&quot;admin&quot;</strong> as the username in the " . $password_reset . ".</p>\n";
 }
 $images = drupal_get_path('module', 'stanford_sites_helper') . '/images/';
 $stanford_sites_helper_node = variable_get('stanford_sites_helper_node');
