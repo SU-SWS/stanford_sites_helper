@@ -20,6 +20,7 @@
 #welcome ol li a.fieldset-title:focus {background: url("../images/open.png") no-repeat scroll 98% center #F0F0F0;}
 #welcome ol li .fieldset-wrapper {background: #eee; margin: 0px 0px 10px 70px; padding: 10px; background: #f0f0f0; border-radius:0 0 10px 10px; position: relative; top: -10px;}
 #welcome ol li .fieldset-wrapper p.intro { margin-top:0px;}
+#welcome #quickstart legend {border: none;}
 #welcome #shortcuts ul {margin: 0; padding: 0;}
 #welcome #shortcuts ul li {margin: 0 0 0 20px;}
 #welcome a.btn, a.btn:hover, a.btn:focus, a.btn:active {color: #333;}
