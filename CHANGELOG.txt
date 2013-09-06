@@ -1,6 +1,11 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-beta8, 2013-09-06
+-----------------------------------------------
+-Minor CSS tweaks for welcome text
+-Updated welcome text language
+
 Stanford Sites Helper 7.x-1.0-beta7, 2013-09-03
 -----------------------------------------------
 By jbickar: Updated first steps block to show different language depending on underlying site configuration
