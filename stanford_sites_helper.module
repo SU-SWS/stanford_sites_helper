@@ -5,12 +5,24 @@
  * User interface tweaks and other modifications for the Stanford Sites platform
  */
 
+// 1 time a day.
+define('SSH_QUOTA_CHECK_LIMIT', 60 * 60 * 24);
+// Whole integer percentage in which to check against.
+define('STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD', 80);
 /**
  * Implements hook_init().
  */
 function stanford_sites_helper_init() {
   $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
+
+  // Check to see if the quota is passed the threshold.
+  // If it is then prompt the user with a message.
+  if(!_is_ajax_request() && user_is_logged_in() && _stanford_sites_helper_check_quota()) {
+    _stanford_sites_helper_set_quota_warning_message();
+  }
+
 }
+
 
 /**
  * Implements hook_theme_registry_alter().
@@ -88,6 +100,13 @@ function stanford_sites_helper_menu() {
     'access callback' => 'user_access',
     'access arguments' => array('administer site configuration'),
   );
+  $items['admin/config/stanford-sites-helper/afsquota/check'] = array(
+    'title' => 'Check AFS Storage Quota',
+    'page callback' => 'stanford_sites_helper_page_check_quota',
+    'type' => MENU_CALLBACK,
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+  );
   return $items;
 }
 
@@ -107,7 +126,7 @@ function stanford_sites_helper_theme($existing, $type, $theme, $path) {
 function stanford_sites_helper_backup_migrate_profiles() {
   //set this profile as default
   variable_set('backup_migrate_profile_id', 'stanford_sites_default');
-  
+
   $out = array();
 
   // Get the stanford_sites_default profile.
@@ -117,7 +136,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
     'filename' => '[site:name]',
     'append_timestamp' => '1',
     'timestamp_format' => 'Y-m-d\\TH-i-s',
-    'filters' => 
+    'filters' =>
     array(
       'compression' => 'gzip',
       'notify_success_enable' => 0,
@@ -127,14 +146,14 @@ function stanford_sites_helper_backup_migrate_profiles() {
       'utils_site_offline' => 0,
       'utils_site_offline_message' => 'This site is currently under maintenance. We should be back shortly. Thank you for your patience.',
       'utils_description' => '',
-      'destinations' => 
+      'destinations' =>
       array(
-        'db' => 
+        'db' =>
         array(
-          'exclude_tables' => 
+          'exclude_tables' =>
           array(
           ),
-          'nodata_tables' => 
+          'nodata_tables' =>
           array(
             'cache' => 'cache',
             'cache_admin_menu' => 'cache_admin_menu',
@@ -159,7 +178,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
           'utils_lock_tables' => 0,
           'use_mysqldump' => 0,
         ),
-        'files' => 
+        'files' =>
         array(
           'exclude_filepaths' => 'backup_migrate
   styles
@@ -170,7 +189,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
   tmp
   private',
         ),
-        'files_private' => 
+        'files_private' =>
         array(
           'exclude_filepaths' => 'backup_migrate
   styles
@@ -208,3 +227,162 @@ function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_
   $message = t('If you are having difficulty resetting your password, please !submithelpsu.', array('!submithelpsu' => l('submit a HelpSU request', 'https://helpsu.stanford.edu/?pcat=sites')));
   $form['name']['#suffix'] = $message;
 }
+
+/**
+ * Implements hook_file_insert
+ */
+function stanford_sites_helper_file_insert($file) {
+  if(_stanford_sites_helper_check_quota()) {
+    _stanford_sites_helper_set_quota_warning_message();
+  }
+}
+
+/**
+ * Implements hook_file_insert
+ */
+function stanford_sites_helper_file_update($file) {
+  if(_stanford_sites_helper_check_quota()) {
+    _stanford_sites_helper_set_quota_warning_message();
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// AFS QUOTA CHECK HELPERS -----------------------------------------------------
+// -----------------------------------------------------------------------------
+
+/**
+ * url: admin/config/stanford-sites-helper/afsquota/check
+ * A page to manually check the quota available. Provides additional
+ * information and bypasses the limit check.
+ */
+function stanford_sites_helper_page_check_quota() {
+  $output = '';
+
+  variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+  variable_set('stanford_sites_helper_afsquota_ts', 0);
+
+  $check = _stanford_sites_helper_check_quota();
+
+  if($check){
+    $output .= "<h3 class=\"warning\">" . t('You are nearing your file storage limit. Please submit a ') . l('HelpSU request' , 'http://helpsu.stanford.edu/?pcat=sites') . t(' for more storage.') . "</h3>";
+  }
+  else {
+    $output .= "<h3>" . t('No problems here!') . "</h3><p>" . t('You are well under your file storage limit. please carry on your site tasks as normal. For more information please see the ') . l('site status report page.', 'admin/reports/status') . "</p>";
+  }
+
+  return $output;
+}
+
+/**
+ * [_stanford_sites_helper_get_quota_bool description]
+ * @return [type] [description]
+ */
+function _stanford_sites_helper_get_quota_bool() {
+  return variable_get('stanford_sites_helper_afsquota_threshold_bool', 0);
+}
+
+/**
+ * [_stanford_sites_helper_check_quota description]
+ * @return [type] [description]
+ */
+function _stanford_sites_helper_check_quota() {
+
+  // Check if we need to check.
+  $last_check = variable_get('stanford_sites_helper_afsquota_ts', 0);
+  if(($last_check + SSH_QUOTA_CHECK_LIMIT) < time()) {
+    $usage = _stanford_sites_helper_get_usage();
+    if($usage >= STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD) {
+      variable_set('stanford_sites_helper_afsquota_threshold_bool', 1);
+      return TRUE;
+    }
+    else {
+      variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+      return FALSE;
+    }
+  }
+
+  // See if the quota message has been tiggered.
+  // If it has then we return.
+  if(_stanford_sites_helper_get_quota_bool()) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Returns the percentage of the storage space used.
+ * @return  Integer the whole number percentage
+ */
+function _stanford_sites_helper_get_usage_info() {
+  variable_set('stanford_sites_helper_afsquota_ts', time());
+  $raw = shell_exec(escapeshellcmd('fs lq sites/default/files'));
+
+  // Volume Name | Quota | Used | %Used | Partition
+  // list($volume_name, $max_quota, $bytes_used, $percentage_used, $partition_usage) = explode($raw, " ");
+
+  $keys = array(
+    'volume_name',
+    'max_bits_quota',
+    'bits_used',
+    'percentage_used',
+    'partition_usage',
+  );
+
+  $results = preg_split('/[\r\n]+/', $raw, -1, PREG_SPLIT_NO_EMPTY);
+  $data = split(' +', trim($results[1]));
+
+  // remove '%' from data
+  $data[3] = str_replace('%', '', $data[3]);
+  $data[4] = str_replace('%', '', $data[4]);
+
+  return array_combine($keys, $data);
+}
+
+/**
+ * Returns the percentage of disk usage.
+ * @return integer
+ */
+function _stanford_sites_helper_get_usage() {
+  $info = _stanford_sites_helper_get_usage_info();
+  variable_set('stanford_sites_helper_afsquota_current', $info['percentage_used']);
+  return $info['percentage_used'];
+}
+
+/**
+ * Creates a user message for adminstrators to let them know that their afs
+ * storage is nearing its limit.
+ * @return [type] [description]
+ */
+function _stanford_sites_helper_set_quota_warning_message() {
+
+  global $user;
+
+  // Do not add message for non authenticated users.
+  if(!user_is_logged_in()) {
+    return;
+  }
+
+  $accepted_roles = variable_get('stanford_sites_helper_afsquota_roles', array('administrator'));
+  $check = array_intersect($accepted_roles, array_values($user->roles));
+
+  // Do not add message for non admin type users.
+  if(!$check) {
+    return;
+  }
+
+  $usage = _stanford_sites_helper_get_usage();
+
+  $message = t('You are currently using ' . $usage . '% of your available storage. Please submit a ') . l('HelpSU' , 'http://helpsu.stanford.edu/?pcat=sites') . t(' request for more storage. If you think this message is incorrect and the issue has been resolved try ') . l('checking again', 'admin/config/stanford-sites-helper/afsquota/check') . ".";
+  drupal_set_message($message, 'warning');
+
+}
+/**
+ * Small helper function to check to see if request was an ajax request.
+ * @return boolean [description]
+ */
+function _is_ajax_request() {
+  return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+}
+
