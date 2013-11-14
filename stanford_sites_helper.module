@@ -8,7 +8,7 @@
 // 1 time a day.
 define('SSH_QUOTA_CHECK_LIMIT', 60 * 60 * 24);
 // Whole integer percentage in which to check against.
-define('STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD', 80);
+define('STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD', 90);
 /**
  * Implements hook_init().
  */
@@ -246,6 +246,19 @@ function stanford_sites_helper_file_update($file) {
   }
 }
 
+/**
+ * Implements hook_mail
+ */
+function stanford_sites_helper_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'afsquota_warning':
+        $usage = _stanford_sites_helper_get_usage();
+        $message['subject'] = "You are nearing your storage limit on " . $params['site_name'];
+        $message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the AFS storage limit. Currently, " . $usage . "% of your current allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nAFS Storage Warning";
+      break;
+  }
+}
+
 
 // -----------------------------------------------------------------------------
 // AFS QUOTA CHECK HELPERS -----------------------------------------------------
@@ -294,10 +307,18 @@ function _stanford_sites_helper_check_quota() {
     $usage = _stanford_sites_helper_get_usage();
     if($usage >= STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD) {
       variable_set('stanford_sites_helper_afsquota_threshold_bool', 1);
+
+      $have_i_sent_email = variable_get('stanford_sites_helper_afsquota_sent_email', 0);
+      if($have_i_sent_email == 0) {
+        _stanford_sites_helper_send_warning_email();
+        variable_set('stanford_sites_helper_afsquota_sent_email', 1);
+      }
       return TRUE;
     }
     else {
+      // Quota is back to being ok. Reset warning bool and email notification.
       variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+      variable_set('stanford_sites_helper_afsquota_sent_email', 0);
       return FALSE;
     }
   }
@@ -331,15 +352,18 @@ function _stanford_sites_helper_get_usage_info() {
   );
 
   $results = preg_split('/[\r\n]+/', $raw, -1, PREG_SPLIT_NO_EMPTY);
-  $data = split(' +', trim($results[1]));
+  $data = preg_split('/ +/', trim($results[1]));
 
-  if(!is_array($data) || count($data) !== 5) {
+  if(!is_array($data) || count($data) < 5) {
     throw new Exception("Could not get AFS storage data.");
   }
 
-  // remove '%' from data
-  $data[3] = str_replace('%', '', $data[3]);
-  $data[4] = str_replace('%', '', $data[4]);
+  // remove anything but numbers from data
+  $data[3] = preg_replace('/[^0-9]/', '', $data[3]);
+  $data[4] = preg_replace('/[^0-9]/', '', $data[4]);
+
+  // Ensure only 5 pieces of data.
+  $data = array_slice($data, 0, 5);
 
   return array_combine($keys, $data);
 }
@@ -390,6 +414,33 @@ function _stanford_sites_helper_set_quota_warning_message() {
   drupal_set_message($message, 'warning');
 
 }
+
+/**
+ * Sends an email about the status of the AFS storage usage to user 1
+ * or the passed in array of emails.
+ * @param  array  $emails an array of email accounts to send the email to.
+ * @return boolean - True for success
+ */
+function _stanford_sites_helper_send_warning_email($emails = array()) {
+
+  $to = !empty($emails) ? implode(",", $emails) : _stanford_sites_helper_get_user_1_email();
+  $site_name = variable_get('site_name', 'Your Website');
+  $from = $site_name . ' <no-reply@stanford.edu>';
+  $params = array('site_name' => $site_name);
+  $language = language_default();
+
+  return drupal_mail('stanford_sites_helper', 'afsquota_warning', $to, $language, $params, $from);
+}
+
+/**
+ * Returns user 1's email address
+ * @return string - email address
+ */
+function _stanford_sites_helper_get_user_1_email() {
+  $user = user_load(1);
+  return $user->mail;
+}
+
 /**
  * Small helper function to check to see if request was an ajax request.
  * @return boolean [description]
