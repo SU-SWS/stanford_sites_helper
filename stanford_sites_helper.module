@@ -333,6 +333,10 @@ function _stanford_sites_helper_get_usage_info() {
   $results = preg_split('/[\r\n]+/', $raw, -1, PREG_SPLIT_NO_EMPTY);
   $data = split(' +', trim($results[1]));
 
+  if(!is_array($data) || count($data) !== 5) {
+    throw new Exception("Could not get AFS storage data.");
+  }
+
   // remove '%' from data
   $data[3] = str_replace('%', '', $data[3]);
   $data[4] = str_replace('%', '', $data[4]);
@@ -345,7 +349,15 @@ function _stanford_sites_helper_get_usage_info() {
  * @return integer
  */
 function _stanford_sites_helper_get_usage() {
-  $info = _stanford_sites_helper_get_usage_info();
+
+  try{
+    $info = _stanford_sites_helper_get_usage_info();
+  }
+  catch (Exception $e) {
+    watchdog('stanford_sites_helper', 'Error getting AFS Data. Possibly could not execute shell function or shell function does not exist.');
+    return 0;
+  }
+
   variable_set('stanford_sites_helper_afsquota_current', $info['percentage_used']);
   return $info['percentage_used'];
 }
