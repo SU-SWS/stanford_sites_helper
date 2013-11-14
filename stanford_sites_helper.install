@@ -5,7 +5,9 @@
  */
 
 /**
- * implements hook_requirements
+ * Implements hook_requirements.
+ * Performs a runtime check for file storage usage. Information can be
+ * seen at admin/reports/status/
  */
 
 function stanford_sites_helper_requirements($phase) {
@@ -13,14 +15,14 @@ function stanford_sites_helper_requirements($phase) {
 
   switch ($phase) {
     case 'runtime':
-
+      $t = get_t();
       $usage = _stanford_sites_helper_get_usage();
       $last_check = date('Y-m-d g:ia', variable_get('stanford_sites_helper_afsquota_ts', 0));
       $type = _stanford_sites_helper_get_quota_bool() ? REQUIREMENT_WARNING : REQUIREMENT_INFO;
 
       $requirements['afsquotastorage'] = array(
-        'title' => 'AFS Storage Limit',
-        'value' => t('As of ' . $last_check . ' your account is using ' . $usage . '% of your total file storage. ') . l('Check again.', 'admin/config/stanford-sites-helper/afsquota/check') . t(' Or, ') . l('request more storage.' , 'http://helpsu.stanford.edu/?pcat=sites'),
+        'title' => 'File Storage Limit',
+        'value' => $t('As of ' . $last_check . ' your account is using ' . $usage . '% of your total file storage. ') . l('Check again.', 'admin/config/stanford-sites-helper/filequota/check') . $t(' Or, ') . l('request more storage.' , 'http://helpsu.stanford.edu/?pcat=sites'),
         'severity' => $type,
       );
 
@@ -29,12 +31,12 @@ function stanford_sites_helper_requirements($phase) {
   return $requirements;
 }
 /**
- * [stanford_sites_helper_install description]
- * @return [type] [description]
+ * Implements hook_install
+ * Sets default variables for use in system.
  */
 function stanford_sites_helper_install() {
 
-  // Variable to store wether threshold has been reached.
+  // Variable to store whether threshold has been reached.
   variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
   // Variable to store which roles can see the warning message.
   variable_set('stanford_sites_helper_afsquota_roles', array(
@@ -49,8 +51,8 @@ function stanford_sites_helper_install() {
 
 }
 /**
- * [stanford_sites_helper_uninstall description]
- * @return [type] [description]
+ * Implements hook_uninstall
+ * Removes variables from DB.
  */
 function stanford_sites_helper_uninstall() {
 
