@@ -233,8 +233,12 @@ function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_
  * Implements hook_file_insert
  */
 function stanford_sites_helper_file_insert($file) {
+
   // Every time a new file is saved we should run the check quota.
-  if(_stanford_sites_helper_check_quota()) {
+  variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+  variable_set('stanford_sites_helper_afsquota_ts', 0);
+
+  if (_stanford_sites_helper_check_quota()) {
     _stanford_sites_helper_set_quota_warning_message();
   }
 }
@@ -243,8 +247,12 @@ function stanford_sites_helper_file_insert($file) {
  * Implements hook_file_insert
  */
 function stanford_sites_helper_file_update($file) {
+
   // Every time a new file is updated we should run the check quota.
-  if(_stanford_sites_helper_check_quota()) {
+  variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+  variable_set('stanford_sites_helper_afsquota_ts', 0);
+
+  if (_stanford_sites_helper_check_quota()) {
     _stanford_sites_helper_set_quota_warning_message();
   }
 }
@@ -255,9 +263,9 @@ function stanford_sites_helper_file_update($file) {
 function stanford_sites_helper_mail($key, &$message, $params) {
   switch ($key) {
     case 'afsquota_warning':
-        $usage = _stanford_sites_helper_get_usage();
-        $message['subject'] = "You are nearing your storage limit on " . $params['site_name'];
-        $message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the file storage limit. Currently, " . $usage . "% of your allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nStanford Sites Team";
+      $usage = _stanford_sites_helper_get_usage();
+      $message['subject'] = "You are nearing your storage limit on " . $params['site_name'];
+      $message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the file storage limit. Currently, " . $usage . "% of your allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nStanford Sites Team";
       break;
   }
 }
