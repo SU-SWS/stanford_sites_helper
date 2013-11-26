@@ -293,7 +293,7 @@ function stanford_sites_helper_page_check_quota() {
     $output .= "<h3 class=\"warning\">" . t('You are nearing your file storage limit. Please submit a ') . l('HelpSU request' , 'http://helpsu.stanford.edu/?pcat=sites') . t(' for more storage.') . "</h3>";
   }
   else {
-    $output .= "<h3>" . t('No problems here!') . "</h3><p>" . t('You are well under your file storage limit. please carry on your site tasks as normal. For more information please see the ') . l('site status report page.', 'admin/reports/status') . "</p>";
+    $output .= "<h3>" . t('No problems here!') . "</h3><p>" . t('You are well under your file storage limit. Please carry on your site tasks as normal. For more information please see the ') . l('site status report page.', 'admin/reports/status') . "</p>";
   }
 
   return $output;
@@ -432,7 +432,7 @@ function _stanford_sites_helper_set_quota_warning_message() {
   $usage = _stanford_sites_helper_get_usage();
 
   $message = t('You are currently using ' . $usage . '% of your available storage. Please submit a ') . l('HelpSU' , 'http://helpsu.stanford.edu/?pcat=sites') . t(' request for more storage. If you think this message is incorrect and the issue has been resolved try ') . l('checking again', 'admin/config/stanford-sites-helper/filequota/check') . ".";
-  drupal_set_message($message, 'warning');
+  drupal_set_message($message, 'warning', FALSE);
 
 }
 
