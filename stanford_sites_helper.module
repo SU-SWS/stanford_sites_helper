@@ -230,7 +230,7 @@ function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_
 }
 
 /**
- * Implements hook_file_insert
+ * Implements hook_file_insert().
  */
 function stanford_sites_helper_file_insert($file) {
 
@@ -244,7 +244,7 @@ function stanford_sites_helper_file_insert($file) {
 }
 
 /**
- * Implements hook_file_insert
+ * Implements hook_file_update().
  */
 function stanford_sites_helper_file_update($file) {
 
@@ -257,6 +257,14 @@ function stanford_sites_helper_file_update($file) {
   }
 }
 
+/**
+ * Implements hook_file_delete().
+ */
+function stanford_sites_helper_file_delete($file) {
+  // Every time a file is deleted we should reset the clock.
+  variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
+  variable_set('stanford_sites_helper_afsquota_ts', 0);
+}
 /**
  * Implements hook_mail
  */
