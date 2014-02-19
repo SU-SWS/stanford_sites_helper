@@ -323,9 +323,12 @@ function _stanford_sites_helper_get_quota_bool() {
  */
 function _stanford_sites_helper_check_quota() {
 
+  global $argv;
+
   // Check if we need to check.
   $last_check = variable_get('stanford_sites_helper_afsquota_ts', 0);
-  if(($last_check + SSH_QUOTA_CHECK_LIMIT) < time()) {
+  $is_install = (isset($argv) && $argv[3] == "si") ? TRUE : FALSE;
+  if(($last_check + SSH_QUOTA_CHECK_LIMIT) < time() && !$is_install) {
     $usage = _stanford_sites_helper_get_usage();
     if($usage >= STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD) {
       variable_set('stanford_sites_helper_afsquota_threshold_bool', 1);
@@ -364,8 +367,7 @@ function _stanford_sites_helper_check_quota() {
  * - Total disk usage percentage
  */
 function _stanford_sites_helper_get_usage_info() {
-  variable_set('stanford_sites_helper_afsquota_ts', time());
-  $raw = shell_exec(escapeshellcmd('fs lq sites/default/files'));
+  variable_set('stanford_sites_helper_afsquota_ts', time());  $raw = shell_exec(escapeshellcmd('fs lq sites/default/files'));
 
   // Volume Name | Quota | Used | %Used | Partition
   // list($volume_name, $max_quota, $bytes_used, $percentage_used, $partition_usage) = explode($raw, " ");
