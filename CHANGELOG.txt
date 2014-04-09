@@ -1,9 +1,13 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
-Stanford Sites Helper 7.x-1.0-beta9, xxxx-xx-xx
------------------------------------------
-- Added AFS storage quota warning message and email functionality for sites that run on the AFS file storage.
+Stanford Sites Helper 7.x-1.0-beta10, 2014-04-09
+-----------------------------------------------
+By jbickar: Added Stanford Memory Booster module for system administrators
+
+Stanford Sites Helper 7.x-1.0-beta9, 2014-03-11
+-----------------------------------------------
+By sheamck: Added AFS storage quota warning message and email functionality for sites that run on the AFS file storage.
 
 Stanford Sites Helper 7.x-1.0-beta8, 2013-09-06
 -----------------------------------------------
