@@ -272,8 +272,16 @@ function stanford_sites_helper_mail($key, &$message, $params) {
   switch ($key) {
     case 'afsquota_warning':
       $usage = _stanford_sites_helper_get_usage();
+      $site_url = url("<front>", array('absolute' => TRUE));
+
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+
       $message['subject'] = "You are nearing your storage limit on " . $params['site_name'];
-      $message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the file storage limit. Currently, " . $usage . "% of your allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nStanford Sites Team";
+      //$message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the file storage limit. Currently, " . $usage . "% of your allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nStanford Sites Team";
+      $message['body'][] = $site_url . " is nearing the file storage limit. \n";
+      $message['body'][] = "You are currently using " . $usage . "% of your available space for uploaded files for this website, which includes documents and images. You can " . l('submit a HelpSU request', 'http://helpsu.stanford.edu/?pcat=sites') ." to increase your limit. In the Request Description field include the phrase: &#8216Please increase the afs quota of " . $site_url . "&#8217; " . l('Submit HelpSU Request', 'http://helpsu.stanford.edu/?pcat=sites');
+      $message['body'][] = "\n\nIf you think this message is incorrect or the issue has been resolved, you can try checking again. " . l('Check available space.', 'admin/config/stanford-sites-helper/filequota/check', array('absolute' => TRUE));
+
       break;
   }
 }
