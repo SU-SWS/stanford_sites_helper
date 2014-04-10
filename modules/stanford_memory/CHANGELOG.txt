@@ -1,2 +1,6 @@
 Stanford Memory Booster 6.x-x.x xxxx-xx-xx
 ------------------------------------------
+
+Stanford Memory Booster 6.x-1.0-beta2 2014-04-10
+------------------------------------------------
+Initial release of Stanford Memory Booster module
