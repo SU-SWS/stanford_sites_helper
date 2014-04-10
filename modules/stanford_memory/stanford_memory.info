@@ -1,0 +1,6 @@
+name = "Stanford Memory Booster"
+description = "Allows system admins to boost the memory limit for a site"
+package = "Stanford"
+core = 6.x
+version = 6.x-1.x-dev
+hidden = TRUE
