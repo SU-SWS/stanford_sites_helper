@@ -389,6 +389,9 @@ function _stanford_sites_helper_get_usage_info() {
   );
 
   $results = preg_split('/[\r\n]+/', $raw, -1, PREG_SPLIT_NO_EMPTY);
+  if (!isset($results[1])) {
+    throw new Exception("Could not get file storage data.");
+  }
   $data = preg_split('/ +/', trim($results[1]));
 
   // If for some reason the above processing does not produce an array of
