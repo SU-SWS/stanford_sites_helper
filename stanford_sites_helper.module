@@ -466,8 +466,6 @@ function _stanford_sites_helper_set_quota_warning_message() {
  */
 function _stanford_sites_helper_send_warning_email($emails = array()) {
 
-  $emails = array('sheamck@stanford.edu');
-
   $to = !empty($emails) ? implode(",", $emails) : _stanford_sites_helper_get_user_1_email();
   $site_name = variable_get('site_name', 'Your Website');
   $from = $site_name . ' <no-reply@stanford.edu>';
