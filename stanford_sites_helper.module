@@ -280,8 +280,9 @@ function stanford_sites_helper_mail($key, &$message, $params) {
       $message['subject'] = "You are nearing your storage limit on " . $params['site_name'];
       //$message['body'][] = url('<front>', array('absolute' => TRUE)) . " is nearing the file storage limit. Currently, " . $usage . "% of your allocated storage is being used. Please submit a file storage increase request to HelpSU or your website may experience issues and possible downtime. To request a storage increase please use the HelpSU request form found at: http://helpsu.stanford.edu/?pcat=sites. \n\nThank you,\nStanford Sites Team";
       $message['body'][] = "<h4>" . $site_url . " is nearing the file storage limit. </h4>";
-      $message['body'][] = "<p>You are currently using " . $usage . "% of your available space for uploaded files for this website, which includes documents and images. You can " . l('submit a HelpSU request', 'http://helpsu.stanford.edu/?pcat=sites') ." to increase your limit.</p> <p>In the Request Description field include the phrase: &#8216Please increase the afs quota of " . $site_url . "&#8217; " . l('Submit HelpSU Request', 'http://helpsu.stanford.edu/?pcat=sites') . "</p>";
-      $message['body'][] = "<p><br />If you think this message is incorrect or the issue has been resolved, you can try checking again. " . l('Check available space.', 'admin/config/stanford-sites-helper/filequota/check', array('absolute' => TRUE)) . "</p>";
+      $message['body'][] = "<p>You are currently using " . $usage . "% of your available space for uploaded files for this website, which includes documents and images. You can " . l('submit a HelpSU request', 'http://helpsu.stanford.edu/?pcat=sites') ." to increase your limit.</p> <p>In the Request Description field include the phrase: &#8216 Please increase the afs quota of " . $site_url . " &#8217; </p>";
+      $message['body'][] = "<p>If you think this message is incorrect or the issue has been resolved, you can try checking again. " . l('Check available space.', 'admin/config/stanford-sites-helper/filequota/check', array('absolute' => TRUE)) . "</p>";
+      $message['body'][] = "<p><br />Regards,<br />Stanford Web Services</p>";
 
       break;
   }
@@ -473,28 +474,30 @@ function _stanford_sites_helper_send_warning_email($emails = array()) {
   $language = language_default();
   $my_module = 'stanford_sites_helper';
   $my_mail_token = 'afsquota_warning';
-  $body = "";
-  stanford_sites_helper_mail($my_mail_token, $body, $params);
+  $message = array();
+  stanford_sites_helper_mail($my_mail_token, $message, $params);
+  $body = drupal_wrap_mail(implode("",$message['body']));
+  $subject = $message['subject'];
 
-//  return drupal_mail('stanford_sites_helper', 'afsquota_warning', $to, $language, $params, $from);
+  //  return drupal_mail('stanford_sites_helper', 'afsquota_warning', $to, $language, $params, $from);
 
-  $message = array(
-  'to' => $to,
-  'subject' => $subject,
-  'body' => $body,
-  'headers' => array(
-  'From' => $from,
-  'MIME-Version' => '1.0',
-    'Content-Type' => 'text/html;charset=utf-8',),
-  );
-  $system = drupal_mail_system($my_module, $my_mail_token);
-  if ($system->mail($message)) {
-    watchdog('stanford_sites_helper', 'Sent AFS Storage Warning Email.', array(), WATCHDOG_NOTICE);
-  }
-  else {
-    watchdog('stanford_sites_helper', 'FAILED TO SEND AFS Storage Warning Email.', array(), WATCHDOG_ERROR);
-  }
+  // $system = drupal_mail_system($my_module, $my_mail_token);
+  // if ($system->mail($message)) {
+  //   watchdog('stanford_sites_helper', 'Sent AFS Storage Warning Email.', array($system), WATCHDOG_NOTICE);
+  // }
+  // else {
+  //   watchdog('stanford_sites_helper', 'FAILED TO SEND AFS Storage Warning Email.', array($system), WATCHDOG_ERROR);
+  //   print_r($system->error);
+  // }
 
+   // To send HTML mail, the Content-type header must be set
+  $headers  = 'MIME-Version: 1.0' . "\r\n";
+  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+  // Additional headers
+  $headers .= 'From:' . addslashes($from) . "\r\n";
+
+  mail($to, $subject, $body, $headers);
 }
 
 /**
