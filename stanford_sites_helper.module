@@ -471,8 +471,30 @@ function _stanford_sites_helper_send_warning_email($emails = array()) {
   $from = $site_name . ' <no-reply@stanford.edu>';
   $params = array('site_name' => $site_name);
   $language = language_default();
+  $my_module = 'stanford_sites_helper';
+  $my_mail_token = 'afsquota_warning';
+  $body = "";
+  stanford_sites_helper_mail($my_mail_token, $body, $params);
 
-  return drupal_mail('stanford_sites_helper', 'afsquota_warning', $to, $language, $params, $from);
+//  return drupal_mail('stanford_sites_helper', 'afsquota_warning', $to, $language, $params, $from);
+
+  $message = array(
+  'to' => $to,
+  'subject' => $subject,
+  'body' => $body,
+  'headers' => array(
+  'From' => $from,
+  'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html;charset=utf-8',),
+  );
+  $system = drupal_mail_system($my_module, $my_mail_token);
+  if ($system->mail($message)) {
+    watchdog('stanford_sites_helper', 'Sent AFS Storage Warning Email.', array(), WATCHDOG_NOTICE);
+  }
+  else {
+    watchdog('stanford_sites_helper', 'FAILED TO SEND AFS Storage Warning Email.', array(), WATCHDOG_ERROR);
+  }
+
 }
 
 /**
