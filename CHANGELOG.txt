@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.0-beta11, 2014-04-17
+------------------------------------------------
+-Bug fixes and improvements to AFS storage quota warning
+
 Stanford Sites Helper 7.x-1.0-beta10, 2014-04-09
 -----------------------------------------------
 By jbickar: Added Stanford Memory Booster module for system administrators

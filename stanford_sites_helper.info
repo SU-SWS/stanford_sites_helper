@@ -2,4 +2,4 @@ name = "Stanford Sites Helper"
 description = "User interface tweaks and other modifications for the Stanford Sites platform"
 core = 7.x
 package = "Stanford"
-version = "7.x-1.0-beta10"
+version = "7.x-1.0-beta11"
