@@ -282,7 +282,7 @@ function stanford_sites_helper_mail($key, &$message, $params) {
       $message['body'][] = "<p>****************** DO NOT REPLY TO THIS AUTOMATED MESSAGE ******************</p>";
       $message['body'][] = "<p><strong>You are currently using " . $usage . "% of your available disk space for documents and images on " . l($site_url, $site_url) . ".</strong></p>";
       $message['body'][] = "<p>If you exceed your disk space limit, you may encounter errors when trying to upload files to your site.";
-      $message['body'][] = "<p>Additional disk space is available at no charge. Please submit a HelpSU request at http://helpsu.stanford.edu/?pcat=sites to increase your limit.</p>";
+      $message['body'][] = "<p>Additional disk space is available at no charge. Please submit a HelpSU request at " .  l("http://helpsu.stanford.edu/?pcat=sites", "http://helpsu.stanford.edu/?pcat=sites") . " to increase your limit.</p>";
       $message['body'][] = "<p>If you think this message is incorrect or the issue has been resolved, you can try checking again. " . l('Check available space.', 'admin/config/stanford-sites-helper/filequota/check', array('absolute' => TRUE)) . "</p>";
       $message['body'][] = "<p>****************** DO NOT REPLY TO THIS AUTOMATED MESSAGE ******************</p>";
 
