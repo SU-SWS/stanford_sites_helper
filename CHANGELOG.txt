@@ -1,6 +1,14 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.1, 2014-07-02
+-----------------------------------------
+-No functional changes; versioning cleanup only
+
+Stanford Sites Helper 7.x-1.0, 2014-06-30
+-----------------------------------------
+-Improvements to AFS storage quota warning email
+
 Stanford Sites Helper 7.x-1.0-beta11, 2014-04-17
 ------------------------------------------------
 -Bug fixes and improvements to AFS storage quota warning
