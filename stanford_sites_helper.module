@@ -121,6 +121,30 @@ function stanford_sites_helper_theme($existing, $type, $theme, $path) {
     ),
   );
 }
+
+/**
+ * Implements hook_backup_migrate_profiles_alter().
+ */
+function stanford_sites_helper_backup_migrate_profiles_alter(&$profiles) {
+  $profiles['default']->filters['sources']['files']['exclude_filepaths'] = 'backup_migrate
+styles
+css
+js
+ctools
+.htaccess
+tmp
+private';
+  $profiles['default']->filters['sources']['archive']['exclude_filepaths'] = 'public://backup_migrate
+public://styles
+public://css
+public://js
+public://ctools
+public://less
+sites/default/settings.php
+sites/default/files/tmp
+sites/default/files/private';
+}
+
 /**
  * Implements hook_backup_migrate_profiles().
  */
@@ -132,55 +156,60 @@ function stanford_sites_helper_backup_migrate_profiles() {
 
   // Get the stanford_sites_default profile.
   $out['stanford_sites_default'] = backup_migrate_crud_create_item('profile', array(
-    'profile_id' => 'stanford_sites_default',
+    'profile_id' => NULL,
+    'machine_name' => 'stanford_sites_default',
     'name' => 'Stanford Sites Profile',
     'filename' => '[site:name]',
-    'append_timestamp' => '1',
+    'append_timestamp' => 1,
     'timestamp_format' => 'Y-m-d\\TH-i-s',
     'filters' =>
-    array(
+    array (
+      'encryption' => 'none',
       'compression' => 'gzip',
-      'notify_success_enable' => 0,
-      'notify_success_email' => '',
-      'notify_failure_enable' => 0,
-      'notify_failure_email' => '',
-      'utils_site_offline' => 0,
-      'utils_site_offline_message' => 'This site is currently under maintenance. We should be back shortly. Thank you for your patience.',
-      'utils_description' => '',
-      'destinations' =>
-      array(
+      'notify_success_enable' => false,
+      'notify_failure_enable' => false,
+      'sources' =>
+      array (
         'db' =>
-        array(
-          'exclude_tables' =>
-          array(
-          ),
+        array (
           'nodata_tables' =>
-          array(
-            'cache' => 'cache',
-            'cache_admin_menu' => 'cache_admin_menu',
-            'cache_block' => 'cache_block',
-            'cache_bootstrap' => 'cache_bootstrap',
-            'cache_field' => 'cache_field',
-            'cache_filter' => 'cache_filter',
-            'cache_form' => 'cache_form',
-            'cache_image' => 'cache_image',
-            'cache_menu' => 'cache_menu',
-            'cache_page' => 'cache_page',
-            'cache_path' => 'cache_path',
-            'cache_update' => 'cache_update',
-            'cache_views' => 'cache_views',
-            'cache_views_data' => 'cache_views_data',
-            'search_dataset' => 'search_dataset',
-            'search_index' => 'search_index',
-            'search_total' => 'search_total',
-            'sessions' => 'sessions',
-            'watchdog' => 'watchdog',
+          array (
+            0 => 'cache',
+            1 => 'cache_admin_menu',
+            2 => 'cache_browscap',
+            3 => 'cache_content',
+            4 => 'cache_filter',
+            5 => 'cache_calendar_ical',
+            6 => 'cache_location',
+            7 => 'cache_menu',
+            8 => 'cache_page',
+            9 => 'cache_reptag',
+            10 => 'cache_views',
+            11 => 'cache_views_data',
+            12 => 'cache_block',
+            13 => 'cache_update',
+            14 => 'cache_form',
+            15 => 'cache_bootstrap',
+            16 => 'cache_field',
+            17 => 'cache_image',
+            18 => 'cache_path',
+            19 => 'sessions',
+            20 => 'search_dataset',
+            21 => 'search_index',
+            22 => 'search_keywords_log',
+            23 => 'search_total',
+            24 => 'watchdog',
+            25 => 'accesslog',
+            26 => 'devel_queries',
+            27 => 'devel_times',
           ),
-          'utils_lock_tables' => 0,
-          'use_mysqldump' => 0,
+          'exclude_tables' =>
+          array (
+          ),
+          'utils_lock_tables' => false,
         ),
         'files' =>
-        array(
+        array (
           'exclude_filepaths' => 'backup_migrate
   styles
   css
@@ -190,22 +219,26 @@ function stanford_sites_helper_backup_migrate_profiles() {
   tmp
   private',
         ),
-        'files_private' =>
-        array(
-          'exclude_filepaths' => 'backup_migrate
-  styles
-  css
-  js
-  ctools
-  .htaccess
-  tmp',
+        'archive' =>
+        array (
+          'exclude_filepaths' => 'public://backup_migrate
+  public://styles
+  public://css
+  public://js
+  public://ctools
+  public://less
+  sites/default/settings.php
+  sites/default/files/tmp
+  sites/default/files/private',
         ),
       ),
-      'encryption' => 'none',
       'utils_disable_query_log' => true,
+      'utils_site_offline' => false,
+      'utils_description' => '',
     ),
+    'type_name' => 'profile',
   )
-);
+  );
 
   return $out;
 
