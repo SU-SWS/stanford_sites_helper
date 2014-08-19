@@ -1,6 +1,11 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.2, 2014-08-19
+-----------------------------------------
+By jbickar: Updated default Backup and Migrate profiles to work with Backup and 
+  Migrate 7.x-3.0
+
 Stanford Sites Helper 7.x-1.1, 2014-07-02
 -----------------------------------------
 -No functional changes; versioning cleanup only

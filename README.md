@@ -1,5 +1,5 @@
 #[Stanford Sites Helper](https://github.com/SU-SWS/stanford_sites_helper)
-##### Version: 7.x-1.1
+##### Version: 7.x-1.2
 
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)   
 [Changelog.txt](CHANGELOG.txt)
@@ -24,7 +24,8 @@ Nothing special needed.
 Troubleshooting
 ---
 
-If you are experiencing issues with this module try reverting the feature first. If you are still experiencing issues try posting an issue on the GitHub issues page.
+The 7.x-1.2 version of Stanford Sites Helper requires Backup and Migrate version 7.x-3.0 or later.
+Please use 7.x-1.1 of Stanford Sites Helper with Backup and Migrate 7.x-2.x versions.
 
 Contribution / Collaboration
 ---
