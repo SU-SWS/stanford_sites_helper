@@ -121,7 +121,7 @@ drupal_add_css($path);
         <fieldset class="field-group-fieldset collapsible collapsed">
           <legend><img src="<?php print $images ?>brush.png" alt="brush" /> <span class="fieldset-legend">Edit the look and feel of your site</span></legend>
           <div class="fieldset-wrapper">
-            <p class="intro">Your site comes pre-packaged with the Stanford Basic theme. Edit the settings for Stanford Basic to add a background image and change the color scheme. If you're looking to do more custom CSS for your site, use the CSS Injector module.</p>
+            <p class="intro">Your site comes pre-packaged with the Stanford Light theme. Edit the settings for Stanford Light to add a background image and change the color scheme. If you're looking to do more custom CSS for your site, use the CSS Injector module.</p>
             <p><?php print $edit_theme_settings; ?></p>
             <p><?php print $create_css_injector; ?></p>
           </div>
