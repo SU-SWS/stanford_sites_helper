@@ -1,7 +1,7 @@
 #[Stanford Sites Helper](https://github.com/SU-SWS/stanford_sites_helper)
-##### Version: 7.x-1.2
+##### Version: 7.x-1.3
 
-Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)   
+Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)
 [Changelog.txt](CHANGELOG.txt)
 
 This module provides UI tweaks and other enhancements for the Stanford Sites platform.
