@@ -24,6 +24,18 @@ function stanford_sites_helper_init() {
 
 }
 
+/**
+ * Implements hook_permission().
+ */
+function stanford_sites_helper_permission() {
+  return array(
+    'import bundles' =>  array(
+      'title' => t('Import bundles'),
+      'description' => t('Provides the ability to import bundles using the Bundle Copy module import form.'),
+    ),
+  );
+}
+
 
 /**
  * Implements hook_theme_registry_alter().
@@ -111,6 +123,21 @@ function stanford_sites_helper_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_menu_alter().
+ */
+function stanford_sites_helper_menu_alter(&$items) {
+
+  if (module_exists('bundle_copy')) {
+    $items['admin/structure/types/import']['access callback'] = "user_access";
+    $items['admin/structure/types/import']['access arguments'] = array("import bundles");
+    $items['admin/config/people/accounts/import']['access callback'] = "user_access";
+    $items['admin/config/people/accounts/import']['access arguments'] = array("import bundles");
+    $items['admin/structure/taxonomy/import']['access callback'] = "user_access";
+    $items['admin/structure/taxonomy/import']['access_arguments'] = array("import bundles");
+  }
+
+}
 /**
  * Page callback.
  */
