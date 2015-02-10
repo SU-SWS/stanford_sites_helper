@@ -1,5 +1,5 @@
 #[Stanford Sites Helper](https://github.com/SU-SWS/stanford_sites_helper)
-##### Version: 7.x-1.3
+##### Version: 7.x-1.4
 
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)
 [Changelog.txt](CHANGELOG.txt)
