@@ -1,6 +1,12 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.4, 2015-02-10
+-----------------------------------------
+Changes since 7.x-1.3:
+By sherakama:
+  - Adds permission for bundle copy import ("Copy bundles")
+
 Stanford Sites Helper 7.x-1.3, 2014-11-08
 -----------------------------------------
 By jbickar: Minor update to welcome text.
