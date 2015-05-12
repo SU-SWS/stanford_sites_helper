@@ -14,9 +14,7 @@ define('STANFORD_SUBSITE_HELPER_AFSQUOTA_THRESHOLD', 90);
  * Implements hook_init().
  */
 function stanford_sites_helper_init() {
-  $path = drupal_get_path('module', 'stanford_sites_helper') . '/css/stanford-sites-helper.css';
-
-  // Check to see if the quota is passed the threshold.
+  // Check to see if the quota is past the threshold.
   // If it is then prompt the user with a message.
   if(!_is_ajax_request() && user_is_logged_in() && _stanford_sites_helper_check_quota()) {
     _stanford_sites_helper_set_quota_warning_message();
