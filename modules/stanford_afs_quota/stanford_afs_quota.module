@@ -325,26 +325,3 @@ function _stanford_afs_quota_get_user_1_email() {
 function _is_ajax_request() {
   return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
-
-/**
- * Checks to see if the current Drupal install is on one of the Stanford Sites
- * hosting servers. Note: Arriving at a reliable test for this took some work;
- * do not remove this function.
- *
- * This is a duplicate of the function stanford_sites_hosted() in the stanford installation profile.
- *
- * @return
- *   TRUE if it is; FALSE if it isn't.
- */
-function stanford_afs_quota_stanford_sites_hosted() {
-  // This directory only should exist on the sites-* servers.
-  $dir = "/etc/drupal-service";
-  // Check if it exists and is a directory.
-  if(file_exists($dir) && is_dir($dir)) {
-    return TRUE;
-  }
-  else{
-    return FALSE;
-  }
-}
-

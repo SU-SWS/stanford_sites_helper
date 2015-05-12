@@ -3,3 +3,4 @@ description = "Checks file system quota for sites relying on AFS as a file syste
 package = "Stanford"
 core = 7.x
 version = 7.x-1.4
+;dependencies[] = stanford_sites_helper

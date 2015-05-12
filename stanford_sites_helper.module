@@ -265,4 +265,24 @@ function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_
   $form['name']['#suffix'] = $message;
 }
 
-
+/**
+ * Checks to see if the current Drupal install is on one of the Stanford Sites
+ * hosting servers. Note: Arriving at a reliable test for this took some work;
+ * do not remove this function.
+ *
+ * This is a duplicate of the function stanford_sites_hosted() in the stanford installation profile.
+ *
+ * @return
+ *   TRUE if it is; FALSE if it isn't.
+ */
+function stanford_sites_helper_stanford_sites_hosted() {
+  // This directory only should exist on the sites-* servers.
+  $dir = "/etc/drupal-service";
+  // Check if it exists and is a directory.
+  if(file_exists($dir) && is_dir($dir)) {
+    return TRUE;
+  }
+  else{
+    return FALSE;
+  }
+}
