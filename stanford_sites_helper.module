@@ -50,7 +50,7 @@ function stanford_sites_helper_search_noresults() {
  * Implements hook_block_info().
  */
 function stanford_sites_helper_block_info() {
-  if(stanford_sites_helper_stanford_sites_hosted()) {
+  if (stanford_sites_helper_stanford_sites_hosted()) {
     $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
     $blocks['helplinks']['properties']['administrative'] = 1;
     $blocks['helplinks']['status'] = 1;
@@ -166,17 +166,17 @@ function stanford_sites_helper_backup_migrate_profiles() {
     'append_timestamp' => 1,
     'timestamp_format' => 'Y-m-d\\TH-i-s',
     'filters' =>
-    array (
+    array(
       'encryption' => 'none',
       'compression' => 'gzip',
       'notify_success_enable' => false,
       'notify_failure_enable' => false,
       'sources' =>
-      array (
+      array(
         'db' =>
-        array (
+        array(
           'nodata_tables' =>
-          array (
+          array(
             0 => 'cache',
             1 => 'cache_admin_menu',
             2 => 'cache_browscap',
@@ -207,12 +207,12 @@ function stanford_sites_helper_backup_migrate_profiles() {
             27 => 'devel_times',
           ),
           'exclude_tables' =>
-          array (
+          array(
           ),
           'utils_lock_tables' => false,
         ),
         'files' =>
-        array (
+        array(
           'exclude_filepaths' => 'backup_migrate
   styles
   css
@@ -223,7 +223,7 @@ function stanford_sites_helper_backup_migrate_profiles() {
   private',
         ),
         'archive' =>
-        array (
+        array(
           'exclude_filepaths' => 'public://backup_migrate
   public://styles
   public://css
@@ -261,7 +261,7 @@ function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $contex
  * Implements hook_form_FORM_ID_alter().
  */
 function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_id) {
-  $message = t('If you are having difficulty resetting your password, please !submithelpsu.', array('!submithelpsu' => l('submit a HelpSU request', 'https://helpsu.stanford.edu/?pcat=sites')));
+  $message = t('If you are having difficulty resetting your password, please !submithelpsu.', array('!submithelpsu' => l(t('submit a HelpSU request'), 'https://helpsu.stanford.edu/?pcat=sites')));
   $form['name']['#suffix'] = $message;
 }
 
@@ -279,10 +279,10 @@ function stanford_sites_helper_stanford_sites_hosted() {
   // This directory only should exist on the sites-* servers.
   $dir = "/etc/drupal-service";
   // Check if it exists and is a directory.
-  if(file_exists($dir) && is_dir($dir)) {
+  if (file_exists($dir) && is_dir($dir)) {
     return TRUE;
   }
-  else{
+  else {
     return FALSE;
   }
 }
