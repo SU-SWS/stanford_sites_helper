@@ -1,69 +1,45 @@
 <?php
 /**
  * @file
- * Stanford Sites Installation File. Contains installation hooks.
  */
 
 /**
- * Implements hook_requirements.
- * Performs a runtime check for file storage usage. Information can be
- * seen at admin/reports/status/
+ * Implements hook_install().
  */
+function stanford_sites_helper_install() {}
 
-function stanford_sites_helper_requirements($phase) {
-  $requirements = array();
-
-  switch ($phase) {
-    case 'runtime':
-      $t = get_t();
-      $usage = _stanford_sites_helper_get_usage();
-      $last_check = date('Y-m-d g:ia', variable_get('stanford_sites_helper_afsquota_ts', 0));
-      $type = _stanford_sites_helper_get_quota_bool() ? REQUIREMENT_WARNING : REQUIREMENT_INFO;
-
-      $requirements['afsquotastorage'] = array(
-        'title' => 'File Storage Limit',
-        'value' => $t('As of ' . $last_check . ' your account is using ' . $usage . '% of your total file storage. ') . l('Check again.', 'admin/config/stanford-sites-helper/filequota/check') . $t(' Or, ') . l('request more storage.' , 'http://helpsu.stanford.edu/?pcat=sites'),
-        'severity' => $type,
-      );
-
-      break;
-  }
-  return $requirements;
-}
 /**
- * Implements hook_install
- * Sets default variables for use in system.
+ * Implements hook_enable().
  */
-function stanford_sites_helper_install() {
+function stanford_sites_helper_enable() {}
 
-  // Variable to store whether threshold has been reached.
-  variable_set('stanford_sites_helper_afsquota_threshold_bool', 0);
-  // Variable to store which roles can see the warning message.
-  variable_set('stanford_sites_helper_afsquota_roles', array(
-    'administrator'
-  ));
-  // Last time limit was checked.
-  variable_set('stanford_sites_helper_afsquota_ts', 0);
-  // Keep track of what the user is at.
-  variable_set('stanford_sites_helper_afsquota_current', 0);
-  // Have we sent warning email already checker.
-  variable_del('stanford_sites_helper_afsquota_sent_email', 0);
-
-}
 /**
- * Implements hook_uninstall
- * Removes variables from DB.
+ * Implements hook_disable().
  */
-function stanford_sites_helper_uninstall() {
+function stanford_sites_helper_disable() {}
 
-  // Remove the vars...
+/**
+ * Implements hook_uninstall().
+ */
+function stanford_sites_helper_uninstall() {}
+
+/**
+ * Remove old afs check variables and enable new AFS check module.
+ */
+function stanford_sites_helper_update_7100($node) {
+
+  // Remove variables from previous version.
   variable_del('stanford_sites_helper_afsquota_threshold_bool');
   variable_del('stanford_sites_helper_afsquota_roles');
   variable_del('stanford_sites_helper_afsquota_ts');
   variable_del('stanford_sites_helper_afsquota_current');
   variable_del('stanford_sites_helper_afsquota_sent_email');
 
+  // Check if still on sites.
+  if (stanford_sites_helper_stanford_sites_hosted()) {
+    if (!module_exists("stanford_afs_quota")) {
+      module_enable(array("stanford_afs_quota"));
+    }
+  }
+
 }
-
-
-?>
