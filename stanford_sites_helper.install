@@ -24,7 +24,7 @@ function stanford_sites_helper_disable() {}
 function stanford_sites_helper_uninstall() {}
 
 /**
- * Remove old afs check variables and enable new AFS check module.
+ * Remove old afs check variables. Enable new AFS check module (but only if site is hosted on Stanford Sites).
  */
 function stanford_sites_helper_update_7100($node) {
 
