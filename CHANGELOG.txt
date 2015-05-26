@@ -1,6 +1,15 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.5, 2015-05-26
+-----------------------------------------
+Changes since 7.x-1.4:
+By jbickar:
+  - Only display block with link to HelpSU if the site is hosted on Stanford Sites
+  - Move AFS quota check into new submodule, stanford_afs_quota
+By sherakama:
+  - Install and update hooks to deal with moving AFS quota check into new module
+
 Stanford Sites Helper 7.x-1.4, 2015-02-10
 -----------------------------------------
 Changes since 7.x-1.3:
