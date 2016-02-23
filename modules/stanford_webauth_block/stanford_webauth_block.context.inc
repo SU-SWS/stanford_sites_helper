@@ -11,7 +11,7 @@ function stanford_webauth_block_context_default_contexts() {
   $export = array();
 
   $context = new stdClass();
-  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'stanford-webauth-login';
   $context->description = 'WebAuth Login Block';
