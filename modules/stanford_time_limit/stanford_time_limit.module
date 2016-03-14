@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Code for the Stanford Memory Booster module.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function stanford_time_init() {
+  // Set the memory_limit to what we set the variable as, or else grab it from the PHP config.
+  $memory_limit = variable_get('stanford_time_limit', ini_get('max_execution_time'));
+  set_time_limit($memory_limit);
+}
