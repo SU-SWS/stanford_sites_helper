@@ -4,14 +4,8 @@
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)
 [Changelog.txt](CHANGELOG.txt)
 
-This module places the webauth login block where it should be using context.
+This module places the webauth login block where it should be using Context.
 
-
-Sub Modules
----
-
-**[Stanford Module Sub Module](https://github.com/SU-SWS/stanford_module)**
-This module provides the Stanford Person entity reference field. By default an instance of this field is created on Stanford Publications but it may be added to other content types.
 
 Installation
 ---
