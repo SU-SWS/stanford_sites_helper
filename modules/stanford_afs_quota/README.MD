@@ -1,5 +1,5 @@
 #[Stanford AFS Quota](https://github.com/SU-SWS/stanford_sites_helper/modules/stanford_afs_quota/)
-##### Version: 7.x-1.6
+##### Version: 7.x-1.6-dev
 
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)
 [Changelog.txt](CHANGELOG.txt)
