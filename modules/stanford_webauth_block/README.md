@@ -1,5 +1,5 @@
 #[Stanford Webauth Block](https://github.com/SU-SWS/stanford_module)
-##### Version: 7.x-1.x
+##### Version: 7.x-1.6
 
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)
 [Changelog.txt](CHANGELOG.txt)

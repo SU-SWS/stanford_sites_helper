@@ -1,6 +1,12 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.6, 2016-05-30
+-----------------------------------------
+- Added stanford_time_limit module to allow for setting the php_max_execute time
+- Added stanford_webauth_block module
+
+
 Stanford Sites Helper 7.x-1.5, 2015-05-26
 -----------------------------------------
 Changes since 7.x-1.4:
