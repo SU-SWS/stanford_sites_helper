@@ -6,7 +6,7 @@ Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.c
 
 This module provides UI tweaks and other enhancements for the Stanford Sites platform.
 * Provides a block with "first steps" for users when they first create a site
-* Provides a block with a link to the HelpSU request form for the Stanford Sites service
+* Provides a block with a link to the service request form for the Stanford Sites service
 * Modifies the "no results found" search help text to fit within the Stanford environment
 * Provides a default Backup and Migrate backup profile
 * Adds file storage checking for those on Stanford Sites.
