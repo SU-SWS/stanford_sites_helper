@@ -1,6 +1,11 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.7, 2017-04-21
+-----------------------------------------
+- CodeClimate integration
+- Updated HelpSU links to point to ServiceNow
+
 Stanford Sites Helper 7.x-1.6, 2016-05-30
 -----------------------------------------
 - Added stanford_time_limit module to allow for setting the php_max_execute time
