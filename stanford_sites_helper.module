@@ -286,3 +286,16 @@ function stanford_sites_helper_stanford_sites_hosted() {
     return FALSE;
   }
 }
+
+/**
+ * Implements hook_boot().
+ *
+ * Prevent Drupal from bootstrapping if the symlink to AFS is not accessible.
+ */
+function stanford_sites_helper_boot() {
+  $afs = shell_exec(escapeshellcmd('ls sites/default/modules/'));
+  if (preg_match('/cannot access/', $afs)) {
+    watchdog('stanford_sites_helper', t('Prevented Drupal from bootstrapping because AFS was not accessible'));
+    exit;
+  }
+}
