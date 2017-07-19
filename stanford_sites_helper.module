@@ -293,9 +293,11 @@ function stanford_sites_helper_stanford_sites_hosted() {
  * Prevent Drupal from bootstrapping if the symlink to AFS is not accessible.
  */
 function stanford_sites_helper_boot() {
-  $afs = shell_exec(escapeshellcmd('ls sites/default/modules/'));
-  if (preg_match('/cannot access/', $afs)) {
+  exec(escapeshellcmd('ls sites/default/modules/'), $output, $return_var);
+  if ($return_var !== 0) {
     watchdog('stanford_sites_helper', 'Prevented Drupal from bootstrapping because AFS was not accessible');
+    mail('jbickar@stanford.edu', 'AFS has gone away', 'AFS has gone away on https://sites.stanford.edu/drpl418');
+    // Exit to prevent Drupal from bootstrapping. Big hammer.
     exit;
   }
 }
