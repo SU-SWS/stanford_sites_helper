@@ -1,21 +1,34 @@
 <?php
-/*
- * @file Template file for Quickstart/First Steps block.
+/**
+ * @file
+ * Template file for Quickstart/First Steps block.
  */
 
-/*
- * Variables
+/**
+ * Variables.
  */
-$user_login_text = l(t('Log in with your SUNetID.'), 'sites/default/webauth/login');
-$webauth_allow_local = variable_get('webauth_allow_local');
-$password_reset = l(t('password reset form'), 'user/password');
+
+// Authentication scheme defaults to SAML.
+$sso_authentication_scheme = 'saml';
+if (module_exists('webauth') && !module_exists('stanford_simplesamlphp_auth')) {
+
+  $sso_authentication_scheme = 'webauth';
+}
+elseif (!module_exists('webauth') && !module_exists('stanford_simplesamlphp_auth')) {
+  $sso_authentication_scheme = 'local';
+}
+$user_login_text = l(t('Log in with your SUNetID'), 'sso/login') . ".";
+if ($sso_authentication_scheme == "webauth") {
+  $user_login_text = l(t('Log in with your SUNetID'), 'sites/default/webauth/login') . ".";
+}
 $user_login_block = "<h2>Welcome to Your Stanford Sites Website</h2>";
 // check if WMD is set to allow local Drupal logins.
 // if so, display the login text to have the user log in as user 1
-if ($webauth_allow_local === 0) {
+if ($sso_authentication_scheme !== 'local') {
   $user_login_block .= '<p>' . $user_login_text . '</p>';
 }
 else {
+  $password_reset = l(t('password reset form'), 'user/password');
   $user_login_block .= "<p>If you haven't already, you should log in via the form to the left.</p>\n";
   $user_login_block .= "<p>Your user name is <strong>admin</strong> and you created a password when you set up the site.</p>\n";
   $user_login_block .= "<p>If you cannot remember your password, you can reset it by entering <strong>&quot;admin&quot;</strong> as the username in the " . $password_reset . ".</p>\n";
