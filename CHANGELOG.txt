@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.8, 2018-06-29
+-----------------------------------------
+- Added composer.json
+
 Stanford Sites Helper 7.x-1.7, 2017-04-21
 -----------------------------------------
 - CodeClimate integration
@@ -10,7 +14,6 @@ Stanford Sites Helper 7.x-1.6, 2016-05-30
 -----------------------------------------
 - Added stanford_time_limit module to allow for setting the php_max_execute time
 - Added stanford_webauth_block module
-
 
 Stanford Sites Helper 7.x-1.5, 2015-05-26
 -----------------------------------------
