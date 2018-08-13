@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.9, 2018-08-13
+-----------------------------------------
+- Updated links to ServiceNow forms
+
 Stanford Sites Helper 7.x-1.8, 2018-06-29
 -----------------------------------------
 - Added composer.json
