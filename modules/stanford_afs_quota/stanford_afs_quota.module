@@ -88,7 +88,7 @@ function stanford_afs_quota_mail($key, &$message, $params) {
       $message['body'][] = "<p>****************** DO NOT REPLY TO THIS AUTOMATED MESSAGE ******************</p>";
       $message['body'][] = "<p><strong>You are currently using " . $usage . "% of your available disk space for documents and images on " . l($site_url, $site_url) . ".</strong></p>";
       $message['body'][] = "<p>If you exceed your disk space limit, you may encounter errors when trying to upload files to your site.";
-      $message['body'][] = "<p>Additional disk space is available at no charge. Please submit a service request at " . l(t("!service", array('!service' => "https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9")), "https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9") . " to increase your limit.</p>";
+      $message['body'][] = "<p>Additional disk space is available at no charge. Please submit a help ticket at " . l(t("!service", array('!service' => "https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=273aa1874f0b83009a9a97411310c796")), "https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=273aa1874f0b83009a9a97411310c796") . " to increase your limit.</p>";
       $message['body'][] = "<p>If you think this message is incorrect or the issue has been resolved, you can try checking again. " . l('Check available space.', 'admin/config/stanford-sites-helper/filequota/check', array('absolute' => TRUE)) . "</p>";
       $message['body'][] = "<p>****************** DO NOT REPLY TO THIS AUTOMATED MESSAGE ******************</p>";
 
@@ -116,7 +116,7 @@ function stanford_afs_quota_page_check_quota() {
   $check = _stanford_afs_quota_check_quota();
 
   if($check){
-    $output .= "<h3 class=\"warning\">" . t('You are nearing your file storage limit. Please submit a') . ' ' . l(t('service request'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9') . ' ' . t('for more storage.') . "</h3>";
+    $output .= "<h3 class=\"warning\">" . t('You are nearing your file storage limit. Please submit a') . ' ' . l(t('help ticket'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=273aa1874f0b83009a9a97411310c796') . ' ' . t('for more storage.') . "</h3>";
   }
   else {
     $output .= "<h3>" . t('No problems here!') . "</h3><p>" . t('You are well under your file storage limit. Please carry on your site tasks as normal. For more information please see the ') . l('site status report page.', 'admin/reports/status') . "</p>";
@@ -262,7 +262,7 @@ function _stanford_afs_quota_set_quota_warning_message() {
 
   $usage = _stanford_afs_quota_get_usage();
 
-  $message = t('You are currently using @usage% of your available storage. Please submit a', array('@usage' => $usage)) . ' ' . l(t('service request'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9') . ' ' . t('for more storage. If you think this message is incorrect and the issue has been resolved try') . ' ' . l(t('checking again'), 'admin/config/stanford-sites-helper/filequota/check') . ".";
+  $message = t('You are currently using @usage% of your available storage. Please submit a', array('@usage' => $usage)) . ' ' . l(t('help ticket'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=273aa1874f0b83009a9a97411310c796') . ' ' . t('for more storage. If you think this message is incorrect and the issue has been resolved try') . ' ' . l(t('checking again'), 'admin/config/stanford-sites-helper/filequota/check') . ".";
   drupal_set_message($message, 'warning', FALSE);
 
 }

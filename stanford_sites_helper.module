@@ -74,7 +74,7 @@ function stanford_sites_helper_block_view($delta) {
   switch ($delta) {
     case 'helplinks':
       $block['subject'] = t('Get Help');
-      $block['content'] = t('Problems using this service? Submit a !service. <hr />', array('!service' => l(t('service request'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9')));
+      $block['content'] = t('Problems using this service? Submit a !service. <hr />', array('!service' => l(t('help ticket'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=abff87fa4f33f2009a9a97411310c723')));
       break;
     case 'firststeps':
       $block['subject'] = t('Quick Steps to Get Started');
@@ -261,7 +261,7 @@ function stanford_sites_helper_wysiwyg_editor_settings_alter(&$settings, $contex
  * Implements hook_form_FORM_ID_alter().
  */
 function stanford_sites_helper_form_user_pass_alter(&$form, &$form_state, $form_id) {
-  $message = t('If you are having difficulty resetting your password, please !service.', array('!service' => l(t('submit a service request'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9')));
+  $message = t('If you are having difficulty resetting your password, please !service.', array('!service' => l(t('submit a help ticket'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9')));
   $form['name']['#suffix'] = $message;
 }
 
