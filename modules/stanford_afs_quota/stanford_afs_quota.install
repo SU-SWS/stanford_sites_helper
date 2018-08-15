@@ -22,7 +22,7 @@ function stanford_afs_quota_requirements($phase) {
 
       $requirements['afsquotastorage'] = array(
         'title' => 'File Storage Limit',
-        'value' => $t('As of @lastcheck your account is using @usage% of your total file storage.', array('@lastcheck' => $last_check, '@usage' => $usage)) . ' ' . l(t('Check again.'), 'admin/config/stanford-sites-helper/filequota/check') . $t(' Or,') . ' ' . l(t('request more storage.'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=c44652e04f13ae0054c23f828110c7d9'),
+        'value' => $t('As of @lastcheck your account is using @usage% of your total file storage.', array('@lastcheck' => $last_check, '@usage' => $usage)) . ' ' . l(t('Check again.'), 'admin/config/stanford-sites-helper/filequota/check') . $t(' Or,') . ' ' . l(t('request more storage.'), 'https://stanford.service-now.com/it_services?id=sc_cat_item&sys_id=273aa1874f0b83009a9a97411310c796'),
         'severity' => $type,
       );
 
