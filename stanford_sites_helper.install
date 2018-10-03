@@ -4,24 +4,26 @@
  */
 
 /**
- * Implements hook_install().
+ * Implements hook_requirements().
  */
-function stanford_sites_helper_install() {}
+function stanford_sites_helper_requirements($phase) {
+  $requirements = array();
 
-/**
- * Implements hook_enable().
- */
-function stanford_sites_helper_enable() {}
+  switch ($phase) {
+    case 'runtime':
+      $file_public_path = variable_get('file_public_path', '');
+      $file_private_path = variable_get('file_private_path', '');
 
-/**
- * Implements hook_disable().
- */
-function stanford_sites_helper_disable() {}
+      $requirements['stanford_sites_helper'] = array(
+        'title' => t('File Paths'),
+        'value' => t('Your public file path is %file_public_path. Your private file path is %file_private_path.', array('%file_public_path' => $file_public_path, '%file_private_path' => $file_private_path)),
+        'severity' => REQUIREMENT_INFO,
+      );
+      break;
+  }
 
-/**
- * Implements hook_uninstall().
- */
-function stanford_sites_helper_uninstall() {}
+  return $requirements;
+}
 
 /**
  * Remove old afs check variables. Enable new AFS check module (but only if site is hosted on Stanford Sites).
