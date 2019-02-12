@@ -50,14 +50,13 @@ function stanford_sites_helper_search_noresults() {
  * Implements hook_block_info().
  */
 function stanford_sites_helper_block_info() {
-  if (stanford_sites_helper_stanford_sites_hosted()) {
-    $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
-    $blocks['helplinks']['properties']['administrative'] = 1;
-    $blocks['helplinks']['status'] = 1;
-    $blocks['helplinks']['region'] = 'help';
-    $blocks['helplinks']['visibility'] = BLOCK_VISIBILITY_LISTED;
-    $blocks['helplinks']['pages'] = "admin\nadmin/*";
-  }
+  $blocks['helplinks']['info'] = t('Display a list of help links specific to Stanford Sites');
+  $blocks['helplinks']['properties']['administrative'] = 1;
+  $blocks['helplinks']['status'] = 1;
+  $blocks['helplinks']['region'] = 'help';
+  $blocks['helplinks']['visibility'] = BLOCK_VISIBILITY_LISTED;
+  $blocks['helplinks']['pages'] = "admin\nadmin/*";
+
   $blocks['firststeps']['info'] = t('Stanford Sites Welcome Text');
   $blocks['firststeps']['status'] = 1;
   $blocks['firststeps']['weight'] = 10;
