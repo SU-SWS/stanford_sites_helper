@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.11, 2019-03-01
+------------------------------------------
+- Bug fix: Remove environment check for displaying the "Get Help" block
+
 Stanford Sites Helper 7.x-1.10, 2018-10-04
 ------------------------------------------
 - Provide a user-facing report of public and private file paths at /admin/reports/status
