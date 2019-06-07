@@ -302,7 +302,7 @@ function stanford_sites_helper_views_bulk_operations_form_alter(&$form, &$form_s
  */
 function stanford_sites_helper_form_user_cancel_confirm_form_alter(&$form, &$form_state, $form_id) {
   $user = $form_state['build_info']['args'][0];
-  _stanford_sites_helper_add_user_content_info($form, $form_state, [$user]);
+  _stanford_sites_helper_add_user_content_info($form, $form_state, [$user->uid]);
   $form['#validate'][] = 'stanford_sites_helper_user_cancel_confirm_validate';
 }
 
