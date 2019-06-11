@@ -285,3 +285,93 @@ function stanford_sites_helper_stanford_sites_hosted() {
     return FALSE;
   }
 }
+
+/**
+ * Implements hook_views_bulk_operations_form_alter().
+ */
+function stanford_sites_helper_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
+  if (isset($form['user_cancel_method'])) {
+    $uids = array_filter($form_state['values']['views_bulk_operations']);
+    _stanford_sites_helper_add_user_content_info($form, $form_state, $uids);
+    $form['actions']['submit']['#validate'][] = 'stanford_sites_helper_user_cancel_confirm_validate';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function stanford_sites_helper_form_user_cancel_confirm_form_alter(&$form, &$form_state, $form_id) {
+  $user = $form_state['build_info']['args'][0];
+  _stanford_sites_helper_add_user_content_info($form, $form_state, [$user->uid]);
+  $form['#validate'][] = 'stanford_sites_helper_user_cancel_confirm_validate';
+}
+
+/**
+ * Add content information to user cancel form.
+ *
+ * @param $form
+ *   Complete form.
+ * @param $form_state
+ *   Current form state.
+ * @param array $user_ids
+ *   Array of users to be canceled.
+ */
+function _stanford_sites_helper_add_user_content_info(&$form, &$form_state, $user_ids = []) {
+  $content = db_select('node', 'n')
+    ->fields('n', ['nid', 'title'])
+    ->condition('uid', $user_ids, 'IN')
+    ->orderBy('changed', 'DESC')
+    ->execute()
+    ->fetchAllKeyed();
+
+  // The user doesn't have any content. No need to ask the user to agree.
+  if (empty($content)) {
+    return;
+  }
+
+  // Build the information and confirmation portion.
+  $form['user_cancel_method']['user_content'] = [
+    '#type' => 'fieldset',
+    '#title' => t("User's Content"),
+    '#attributes' => ['class' => ['user-content']],
+  ];
+
+  $list_items = [
+    '#theme' => 'item_list',
+    '#list_type' => 'ul',
+    '#items' => array_slice($content, 0, 5),
+  ];
+
+  if (count($content) > 5) {
+    $list_items['#items'][] = t('@count more', ['@count' => count($content) - 5]);
+  }
+
+  $form['user_cancel_method']['user_content']['nodes'] = [
+    '#markup' => t('The following content will be deleted: !content', ['!content' => render($list_items)]),
+  ];
+
+  $form['user_cancel_method']['user_content']['delete_content_agree'] = [
+    '#type' => 'checkbox',
+    '#title' => t('I understand this content will be deleted. <strong>This action can not be undone.</strong>'),
+  ];
+
+  $form['#attached']['js'][] = drupal_get_path('module', 'stanford_sites_helper') . '/js/stanford_sites_helper.user_delete_confirm.js';
+}
+
+/**
+ * Custom validation on user delete form to agree to delete content.
+ *
+ * @param array $form
+ *   Complete form.
+ * @param array $form_state
+ *   Current form state.
+ */
+function stanford_sites_helper_user_cancel_confirm_validate($form, &$form_state) {
+  if ($form_state['values']['user_cancel_method'] != 'user_cancel_delete') {
+    return;
+  }
+
+  if (!$form_state['values']['delete_content_agree']) {
+    form_set_error('delete_content_agree', t('You must agree that you understand this content will be deleted.'));
+  }
+}
