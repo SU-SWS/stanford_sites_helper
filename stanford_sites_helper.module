@@ -332,7 +332,7 @@ function _stanford_sites_helper_add_user_content_info(&$form, &$form_state, $use
   // Build the information and confirmation portion.
   $form['user_cancel_method']['user_content'] = [
     '#type' => 'fieldset',
-    '#title' => t("User' Content"),
+    '#title' => t("User's Content"),
     '#attributes' => ['class' => ['user-content']],
   ];
 
@@ -352,7 +352,7 @@ function _stanford_sites_helper_add_user_content_info(&$form, &$form_state, $use
 
   $form['user_cancel_method']['user_content']['delete_content_agree'] = [
     '#type' => 'checkbox',
-    '#title' => t('I understand this content will be deleted. This action can not be undone'),
+    '#title' => t('I understand this content will be deleted. <strong>This action can not be undone.</strong>'),
   ];
 
   $form['#attached']['js'][] = drupal_get_path('module', 'stanford_sites_helper') . '/js/stanford_sites_helper.user_delete_confirm.js';
