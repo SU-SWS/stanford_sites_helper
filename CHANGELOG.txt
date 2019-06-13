@@ -1,6 +1,10 @@
 Stanford Sites Helper x.x-x.x, xxxx-xx-xx
 -----------------------------------------
 
+Stanford Sites Helper 7.x-1.12, 2019-06-12
+------------------------------------------
+- Add confirmation step when deleting a user notifying that the user's content also will be deleted
+
 Stanford Sites Helper 7.x-1.11, 2019-03-01
 ------------------------------------------
 - Bug fix: Remove environment check for displaying the "Get Help" block
